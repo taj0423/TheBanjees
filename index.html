@@ -375,6 +375,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Battle of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Battle of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -394,6 +398,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="sub-field">
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Effect of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Effect of the Year — Clip Upload" accept="video/*">
       </div>
     </div>
 
@@ -415,6 +423,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">strongly recommended</span></span>
         <input type="text" class="nominee-field" name="Clip of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Clip of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -435,6 +447,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="sub-field">
         <span class="sub-label">Clip or Reference Link <span class="opt">optional</span></span>
         <input type="text" class="nominee-field" name="Most Memeable Moment — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Most Memeable Moment — Clip Upload" accept="video/*">
       </div>
     </div>
 
@@ -698,9 +714,17 @@ async function submitForm() {
     showError('Please check all four acknowledgment boxes before submitting.');
     return;
   }
-  if (video && !video.type.startsWith('video/')) {
-    showError('Please upload a valid video file.');
-    return;
+  const fileInputs = document.querySelectorAll('input[type="file"]');
+  for (const input of fileInputs) {
+    const file = input.files[0];
+    if (file && !file.type.startsWith('video/')) {
+      if (input.id === 'video-evidence') {
+        showError('Please upload a valid video file.');
+      } else {
+        showError(`Please upload a valid video file for ${input.name.replace(' — Clip Upload', '')}.`);
+      }
+      return;
+    }
   }
   hideError();
 

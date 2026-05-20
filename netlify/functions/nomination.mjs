@@ -23,7 +23,24 @@ export default async (request) => {
     const answers = {};
     for (const [key, value] of form.entries()) {
       if (key === VIDEO_FIELD) continue;
-      answers[key] = typeof value === 'string' ? value.trim() : '';
+
+      if (value && typeof value !== 'string' && value.size > 0) {
+        if (!value.type.startsWith('video/')) {
+          return json({ error: `Please upload a valid video file for ${key.replace(' — Clip Upload', '')}.` }, { status: 400 });
+        }
+        if (value.size > MAX_VIDEO_BYTES) {
+          return json({ error: `Video uploads for ${key.replace(' — Clip Upload', '')} must be 500 MB or smaller.` }, { status: 400 });
+        }
+
+        const blobKey = `nomination-videos/${crypto.randomUUID()}-${safeFilename(value.name)}`;
+        const store = getStore('banjees-uploads');
+        await store.set(blobKey, value);
+        answers[key] = blobKey;
+      } else if (value && typeof value !== 'string') {
+        answers[key] = '';
+      } else {
+        answers[key] = typeof value === 'string' ? value.trim() : '';
+      }
     }
 
     const nominatorName = answers['Nominator Name'] || '';
