@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Banjees — People's Choice Nomination Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-light:#F0D47A;--gold-pale:#FFF3C4;--gold-dim:#7A5F2A;--gold-dark:#3D2E0A;
+  --red-bright:#CC1010;
+  --deep:#0E0F13;--card:#1C1E26;--card2:#161820;--text:#F2ECD8;--muted:#9A9080;
+}
+html{scroll-behavior:smooth}
+body{background:var(--deep);color:var(--text);font-family:'Libre Baskerville',serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%,rgba(42,45,53,.95) 0%,transparent 70%),
+    radial-gradient(1.5px 1.5px at 8% 12%,rgba(201,168,76,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 18% 28%,rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(2px 2px at 27% 8%,rgba(201,168,76,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 15%,rgba(201,168,76,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 65% 35%,rgba(255,255,255,.6) 0%,transparent 100%),
+    radial-gradient(2px 2px at 72% 5%,rgba(201,168,76,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 82% 22%,rgba(255,255,255,.4) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 91% 40%,rgba(201,168,76,.5) 0%,transparent 100%),
+    radial-gradient(2px 2px at 44% 72%,rgba(201,168,76,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 78% 60%,rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 15% 80%,rgba(201,168,76,.3) 0%,transparent 100%);
+  background-color:#1A1C22;pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(to top,rgba(100,0,0,.2) 0%,transparent 100%);
+  pointer-events:none;z-index:0}
+
+.wrapper{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 20px 80px}
+
+/* HEADER */
+header{text-align:center;padding:48px 0 32px;animation:fadeDown .8s ease both}
+.presenter{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;line-height:1.9}
+.title-the{font-family:'Cinzel Decorative',serif;font-size:clamp(1.5rem,5vw,2.2rem);font-weight:400;background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold) 50%,var(--gold-dim) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:8px;display:block;margin-bottom:2px}
+.title-banjees{font-family:'Cinzel Decorative',serif;font-size:clamp(3rem,11vw,6rem);font-weight:900;line-height:.9;background:linear-gradient(180deg,var(--gold-pale) 0%,var(--gold-light) 30%,var(--gold) 60%,#8A6010 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:8px}
+.title-sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:clamp(1rem,3.5vw,1.4rem);color:var(--gold);letter-spacing:1px;margin-bottom:24px}
+.event-meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.meta-pill{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:var(--gold-dim);border:1px solid var(--gold-dark);padding:5px 14px;text-transform:uppercase}
+.hdivider{display:flex;align-items:center;gap:14px;margin:0 auto 12px;max-width:440px}
+.hdivider::before,.hdivider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim),transparent)}
+.hdivider-icon{color:var(--gold);font-size:16px}
+.form-heading{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-top:8px}
+
+/* BANNERS */
+.elig-banner{background:linear-gradient(135deg,rgba(155,0,0,.22),rgba(100,0,0,.12));border:1px solid rgba(155,0,0,.35);border-left:4px solid var(--red-bright);padding:14px 18px;margin-bottom:20px}
+.elig-banner p{font-size:.85rem;line-height:1.7;color:#D4B8B8}
+.elig-banner strong{color:var(--gold-light)}
+.integrity-note{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.16);padding:14px 18px;margin-bottom:36px}
+.integrity-note p{font-size:.82rem;line-height:1.8;color:var(--muted);font-style:italic}
+.integrity-note strong{color:var(--gold-light);font-style:normal}
+
+/* FORM */
+form{display:flex;flex-direction:column;gap:36px}
+
+/* SECTION HEADERS */
+.section-hd{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.section-num{font-family:'Cinzel Decorative',serif;font-size:1.8rem;font-weight:900;background:linear-gradient(180deg,var(--gold-light),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;flex-shrink:0}
+.section-tag{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:4px;color:var(--red-bright);text-transform:uppercase;margin-bottom:2px}
+.section-title{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);letter-spacing:.5px}
+.section-sub{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:16px;line-height:1.6}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid rgba(201,168,76,.12);padding:22px 22px 18px;position:relative}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.card::after{content:'✦';position:absolute;top:9px;right:13px;color:var(--gold-dim);font-size:10px}
+
+/* FIELDS */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+.field-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+.field-label .opt{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.66rem;letter-spacing:0;text-transform:none;color:rgba(154,144,128,.5);margin-left:6px}
+input[type=text],select,textarea{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--text);font-family:'Libre Baskerville',serif;font-size:.92rem;padding:10px 14px;outline:none;width:100%;border-radius:1px;transition:border-color .22s,background .22s,box-shadow .22s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
+input::placeholder,textarea::placeholder{color:rgba(138,128,112,.4);font-style:italic}
+textarea{resize:vertical;min-height:90px;line-height:1.7}
+.char-counter{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:1px;color:rgba(154,144,128,.5);text-align:right;margin-top:4px;transition:color .2s}
+.char-counter.warn{color:var(--gold)}
+.char-counter.over{color:var(--red-bright)}
+
+/* GROUP BANNERS */
+.group-banner{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:0}
+.group-banner.peoples{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(100,70,0,.1));border:1px solid rgba(201,168,76,.3)}
+.group-banner.event  {background:linear-gradient(135deg,rgba(123,47,190,.18),rgba(60,0,100,.1));border:1px solid rgba(123,47,190,.28)}
+.group-banner.perf   {background:linear-gradient(135deg,rgba(0,144,176,.18),rgba(0,60,100,.1));border:1px solid rgba(0,144,176,.28)}
+.group-banner.person {background:linear-gradient(135deg,rgba(90,138,42,.18),rgba(30,60,0,.1));border:1px solid rgba(90,138,42,.28)}
+.group-banner.impact {background:linear-gradient(135deg,rgba(204,16,16,.18),rgba(100,0,0,.1));border:1px solid rgba(204,16,16,.28)}
+.group-emoji{font-size:18px;flex-shrink:0}
+.group-name{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.group-banner.peoples .group-name{color:var(--gold-light)}
+.group-banner.event   .group-name{color:#C48AFF}
+.group-banner.perf    .group-name{color:#60CFEF}
+.group-banner.person  .group-name{color:#A0D060}
+.group-banner.impact  .group-name{color:#FF8080}
+.group-desc{font-size:.74rem;color:var(--muted);font-style:italic;margin-top:2px}
+
+/* AWARD BLOCKS */
+.award-block{background:var(--card2);border:1px solid rgba(201,168,76,.1);border-top:none;padding:20px 20px 22px;margin-bottom:10px;position:relative}
+.award-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.2),transparent)}
+.award-block:last-of-type{margin-bottom:0}
+.award-num{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
+.award-name{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);margin-bottom:3px}
+.award-tagline{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.8rem;color:var(--gold);margin-bottom:14px}
+.criteria-title{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:7px}
+.criteria-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.criteria-list li{font-size:.81rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.55}
+.criteria-list li::before{content:'✦';position:absolute;left:0;font-size:7px;color:var(--gold-dim);top:5px}
+.criteria-note{font-size:.77rem;color:var(--muted);font-style:italic;margin-top:8px}
+.award-divider{height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.14),transparent);margin:14px 0}
+.nominate-label{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;display:block}
+.nominee-field{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.22);color:var(--text);font-family:'Libre Baskerville',serif;font-size:.92rem;padding:10px 14px;border-radius:1px;outline:none;transition:border-color .2s,box-shadow .2s;margin-bottom:10px;display:block}
+.nominee-field:last-child{margin-bottom:0}
+.nominee-field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
+.nominee-field::placeholder{color:rgba(138,128,112,.4);font-style:italic}
+.sub-label{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.sub-label .opt{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.66rem;letter-spacing:0;text-transform:none;color:rgba(154,144,128,.45);margin-left:5px}
+.sub-field{margin-bottom:10px}
+.sub-field:last-child{margin-bottom:0}
+
+/* IMPACT LOCKED */
+.academy-badge{display:flex;align-items:center;gap:8px;background:rgba(204,16,16,.1);border:1px solid rgba(204,16,16,.25);padding:9px 13px;margin-bottom:10px}
+.academy-badge span{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:#FF8080}
+
+/* CHECKBOXES */
+.check-group{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:11px 13px;border:1px solid rgba(201,168,76,.1);transition:border-color .2s,background .2s}
+.check-item:hover{border-color:rgba(201,168,76,.28);background:rgba(201,168,76,.03)}
+.check-item input[type=checkbox]{appearance:none;width:17px;height:17px;min-width:17px;border:1.5px solid var(--gold-dim);border-radius:2px;cursor:pointer;position:relative;margin-top:3px;background:transparent;transition:border-color .2s,background .2s;padding:0;flex-shrink:0}
+.check-item input[type=checkbox]:checked{border-color:var(--gold);background:var(--gold)}
+.check-item input[type=checkbox]:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;color:var(--deep);font-weight:bold;line-height:1}
+.check-text{font-size:.85rem;color:var(--text);line-height:1.6}
+.check-text strong{color:var(--gold-light);font-weight:400}
+
+/* SUBMIT */
+.submit-wrap{text-align:center}
+.btn-submit{display:inline-block;font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:5px;text-transform:uppercase;color:var(--deep);background:linear-gradient(135deg,var(--gold-pale) 0%,var(--gold-light) 35%,var(--gold) 65%,#8A6010 100%);border:none;padding:18px 56px;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%)}
+.btn-submit::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);opacity:0;transition:opacity .2s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,.22)}
+.btn-submit:hover::before{opacity:1}
+.btn-submit:disabled{opacity:.6;transform:none;cursor:not-allowed}
+.submit-note{margin-top:14px;font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.8}
+.submit-note strong{color:var(--gold-light);font-style:normal}
+#submitError{display:none;margin-top:14px;padding:10px 16px;background:rgba(204,16,16,.1);border:1px solid rgba(204,16,16,.3);border-left:3px solid var(--red-bright)}
+#submitError p{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#FF8080}
+
+/* SUCCESS */
+#successMsg{display:none;text-align:center;padding:60px 28px;background:var(--card);border:1px solid rgba(201,168,76,.18);position:relative}
+#successMsg::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.success-trophy{font-size:52px;margin-bottom:16px;display:block}
+#successMsg h2{font-family:'Cinzel Decorative',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+#successMsg p{color:var(--muted);font-style:italic;line-height:1.9;font-size:.9rem}
+#successMsg strong{color:var(--gold-light);font-style:normal}
+
+/* FOOTER */
+footer{text-align:center;padding:36px 0 0;position:relative;z-index:1}
+.footer-line{width:60px;height:3px;background:var(--red-bright);margin:0 auto 12px}
+footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;line-height:2}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:500px){header{padding:28px 0 20px}.card,.award-block{padding:16px 14px}.btn-submit{padding:15px 32px;font-size:.75rem}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<header>
+  <p class="presenter">Father Keanu Louboutin presents · The 5th Annual Banjee KiKi Ball</p>
+  <span class="title-the">The</span>
+  <span class="title-banjees">Banjees</span>
+  <p class="title-sub">People's Choice Awards</p>
+  <div class="event-meta">
+    <span class="meta-pill">🏆 13 Awards</span>
+    <span class="meta-pill">👑 People's Choice</span>
+    <span class="meta-pill">📍 The CAZ · July 25, 2026</span>
+  </div>
+  <div class="hdivider"><span class="hdivider-icon">✦</span></div>
+  <p class="form-heading">Official Nomination Form</p>
+</header>
+
+<div class="elig-banner">
+  <p><strong>Nomination Period:</strong> May 8 – June 1, 2026 &nbsp;·&nbsp; <strong>Eligibility Window:</strong> May 4, 2025 – May 4, 2026<br>
+  All nominees must have <strong>actively participated in WNY Ballroom</strong> during the eligibility period. Top 5 per category announced by <strong>The People's Choice Academy</strong> on <strong>June 8, 2026</strong>. Public voting opens <strong>June 10</strong>.</p>
+</div>
+<div class="integrity-note">
+  <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
+</div>
+
+<form id="nominationForm">
+
+  <!-- 01: YOUR INFO -->
+  <div>
+    <div class="section-hd">
+      <div class="section-num">01</div>
+      <div><div class="section-tag">Nominator</div><div class="section-title">Your Information</div></div>
+    </div>
+    <p class="section-sub">Kept confidential. Used only for verification by The People's Choice Academy.</p>
+    <div class="card">
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label" for="nom-name">Your Name</label>
+          <input type="text" id="nom-name" name="Nominator Name" placeholder="Ballroom or legal name" maxlength="100" required>
+        </div>
+        <div class="field">
+          <label class="field-label" for="nom-contact">Email or Phone</label>
+          <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="nom-affil">Ballroom Affiliation <span class="opt">optional</span></label>
+        <input type="text" id="nom-affil" name="Nominator Affiliation" placeholder="House, Kiki house, or independent" maxlength="100">
+      </div>
+    </div>
+  </div>
+
+  <!-- 02: AWARD CATEGORIES -->
+  <div>
+    <div class="section-hd">
+      <div class="section-num">02</div>
+      <div><div class="section-tag">Nomination</div><div class="section-title">Award Categories</div></div>
+    </div>
+    <p class="section-sub">Find the award you're nominating for, read the criteria, and fill in your nominee's name. One nomination per submission — submit again to nominate in another category.</p>
+
+    <!-- ═══ PEOPLE'S CHOICE ═══ -->
+    <div class="group-banner peoples">
+      <span class="group-emoji">👑</span>
+      <div><div class="group-name">People's Choice</div><div class="group-desc">The main award — voted on by the community</div></div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 01 · People's Choice</div>
+      <div class="award-name">Most Valuable Participant (MVP)</div>
+      <div class="award-tagline">"The one who stayed outside and stayed relevant."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Consistency throughout the entire year</li>
+        <li>Visibility and presence in the scene</li>
+        <li>Overall contribution to WNY Ballroom</li>
+        <li>Participation, presence, and impact — balanced</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate for MVP</span>
+      <input type="text" class="nominee-field" name="MVP — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="MVP — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+      <div class="sub-field">
+        <span class="sub-label">Instagram / Social Handle <span class="opt">helps verification</span></span>
+        <input type="text" class="nominee-field" name="MVP — Social Handle" placeholder="@handle" maxlength="60">
+      </div>
+    </div>
+
+    <!-- ═══ EVENT-BASED ═══ -->
+    <div class="group-banner event" style="margin-top:10px">
+      <span class="group-emoji">🎪</span>
+      <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 02 · Event-Based</div>
+      <div class="award-name">Ball of the Year</div>
+      <div class="award-tagline">"The ball that set the tone."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Strong production value and organization</li>
+        <li>Creative, well-built categories</li>
+        <li>Packed room with real energy</li>
+        <li>Lasting impact on the WNY scene</li>
+        <li>Overall execution from start to finish</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Ball</span>
+      <input type="text" class="nominee-field" name="Ball of the Year — Ball Name" placeholder="Ball name" maxlength="150">
+      <div class="sub-field">
+        <span class="sub-label">Hosted By <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Ball of the Year — Host" placeholder="Organizer or house name" maxlength="100">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 03 · Event-Based</div>
+      <div class="award-name">Mini Ball of the Year</div>
+      <div class="award-tagline">"Small scale. Big impact."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Creativity within a smaller format</li>
+        <li>Good turnout relative to scale</li>
+        <li>Clean, well-executed event</li>
+        <li>Memorable moments that lingered</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Mini Ball</span>
+      <input type="text" class="nominee-field" name="Mini Ball of the Year — Ball Name" placeholder="Mini ball name" maxlength="150">
+      <div class="sub-field">
+        <span class="sub-label">Hosted By <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Mini Ball of the Year — Host" placeholder="Organizer or house name" maxlength="100">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 04 · Event-Based</div>
+      <div class="award-name">Theme / Concept of the Year</div>
+      <div class="award-tagline">"The theme that actually made sense from beginning to end."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Originality of the concept</li>
+        <li>Cohesion across all categories</li>
+        <li>Visuals and branding matching the theme</li>
+        <li>Clear execution from flyer to floor</li>
+      </ul>
+      <p class="criteria-note">Eligible for any ball or mini ball during the eligibility period.</p>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Theme / Concept</span>
+      <input type="text" class="nominee-field" name="Theme of the Year — Ball + Theme" placeholder="Ball name + theme (e.g. House of X — Underwater Fantasy)" maxlength="200">
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 05 · Event-Based</div>
+      <div class="award-name">Promotional Rollout of the Year</div>
+      <div class="award-tagline">"The ball that had everybody watching early."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Strong, consistent visuals across all promo</li>
+        <li>Rollout cadence that built real anticipation</li>
+        <li>Buzz and engagement in the community</li>
+        <li>Clear promotional identity from announcement to event day</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Rollout</span>
+      <input type="text" class="nominee-field" name="Promotional Rollout of the Year — Ball Name" placeholder="Ball or event name" maxlength="150">
+    </div>
+
+    <!-- ═══ PERFORMANCE-BASED ═══ -->
+    <div class="group-banner perf" style="margin-top:10px">
+      <span class="group-emoji">🎬</span>
+      <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 06 · Performance-Based</div>
+      <div class="award-name">Battle of the Year</div>
+      <div class="award-tagline">"The battle that shook the room."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Skill level of both competitors</li>
+        <li>Crowd reaction and energy in the room</li>
+        <li>Intensity of the battle itself</li>
+        <li>Replay value — people are still talking about it</li>
+        <li>Overall impact on the scene</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Battle</span>
+      <input type="text" class="nominee-field" name="Battle of the Year — Competitors + Ball" placeholder="Competitor names + ball name (e.g. Nova vs Storm — House of X Ball)" maxlength="200">
+      <div class="sub-field">
+        <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
+        <input type="text" class="nominee-field" name="Battle of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 07 · Performance-Based</div>
+      <div class="award-name">Effect of the Year</div>
+      <div class="award-tagline">"The gag, reveal, and the moment."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Creativity of the effect or reveal</li>
+        <li>Flawless execution in the moment</li>
+        <li>Crowd impact — did the room lose it?</li>
+        <li>Memorability — still referenced months later</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate an Effect</span>
+      <input type="text" class="nominee-field" name="Effect of the Year — Performer + Ball" placeholder="Performer name + ball name" maxlength="200">
+      <div class="sub-field">
+        <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
+        <input type="text" class="nominee-field" name="Effect of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 08 · Performance-Based</div>
+      <div class="award-name">Clip of the Year</div>
+      <div class="award-tagline">"The clip everybody had saved."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Viral reach within the scene and beyond</li>
+        <li>Performance quality in the clip itself</li>
+        <li>Replay value — watched over and over</li>
+        <li>Cultural impact within WNY Ballroom</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Clip</span>
+      <input type="text" class="nominee-field" name="Clip of the Year — Performer + Description" placeholder="Performer name + brief description" maxlength="200">
+      <div class="sub-field">
+        <span class="sub-label">Clip Link <span class="opt">strongly recommended</span></span>
+        <input type="text" class="nominee-field" name="Clip of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 09 · Performance-Based</div>
+      <div class="award-name">Most Memeable Moment</div>
+      <div class="award-tagline">"The moment the culture ran with."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Humor, shade, or iconic energy</li>
+        <li>Virality — spread beyond the room</li>
+        <li>Cultural relevance within the community</li>
+        <li>Longevity — the moment had legs</li>
+      </ul>
+      <p class="criteria-note">Moments rooted in personal conflict or targeted disrespect are not eligible.</p>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Moment</span>
+      <input type="text" class="nominee-field" name="Most Memeable Moment — Description" placeholder="Describe the moment + who was involved" maxlength="200">
+      <div class="sub-field">
+        <span class="sub-label">Clip or Reference Link <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Most Memeable Moment — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+    </div>
+
+    <!-- ═══ PERSON-BASED ═══ -->
+    <div class="group-banner person" style="margin-top:10px">
+      <span class="group-emoji">🌟</span>
+      <div><div class="group-name">Person-Based Awards</div><div class="group-desc">Individuals who showed up, judged fairly, and led with integrity</div></div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 10 · Person-Based</div>
+      <div class="award-name">Judge of the Year</div>
+      <div class="award-tagline">"They knew what they were talking about — and stood on it."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Fairness and impartiality on the panel</li>
+        <li>Demonstrated ballroom knowledge and category literacy</li>
+        <li>Strong, commanding presence at the judging table</li>
+        <li>Consistency in scoring and commentary across events</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Judge</span>
+      <input type="text" class="nominee-field" name="Judge of the Year — Nominee Name" placeholder="Judge's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Judge of the Year — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 11 · Person-Based</div>
+      <div class="award-name">Out of Towner of the Year</div>
+      <div class="award-tagline">"Came through and made it count."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Significant impact on the WNY floor</li>
+        <li>Strong crowd response and energy brought</li>
+        <li>Respect earned from the local community</li>
+        <li>A memorable contribution to the WNY scene</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate an Out of Towner</span>
+      <input type="text" class="nominee-field" name="Out of Towner of the Year — Nominee Name + City" placeholder="Ballroom name + city / scene they rep" maxlength="150">
+      <div class="sub-field">
+        <span class="sub-label">Instagram / Social Handle <span class="opt">helps verification</span></span>
+        <input type="text" class="nominee-field" name="Out of Towner of the Year — Social Handle" placeholder="@handle" maxlength="60">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 12 · Person-Based</div>
+      <div class="award-name">Leader of the Year (MF)</div>
+      <div class="award-tagline">"The ones really shaping people."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Demonstrated leadership within the community</li>
+        <li>Active mentorship of others in the scene</li>
+        <li>Influence that elevates WNY Ballroom</li>
+        <li>Positive, consistent contribution to the community</li>
+        <li>Community care and conflict navigation may also be considered</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Leader (MF)</span>
+      <input type="text" class="nominee-field" name="Leader of the Year MF — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Leader of the Year MF — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 13 · Person-Based</div>
+      <div class="award-name">Leader of the Year (FF)</div>
+      <div class="award-tagline">"The ones really shaping people."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Demonstrated leadership within the community</li>
+        <li>Active mentorship of others in the scene</li>
+        <li>Influence that elevates WNY Ballroom</li>
+        <li>Positive, consistent contribution to the community</li>
+        <li>Community care and conflict navigation may also be considered</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate a Leader (FF)</span>
+      <input type="text" class="nominee-field" name="Leader of the Year FF — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Leader of the Year FF — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+    </div>
+
+    <!-- ═══ IMPACT AWARDS ═══ -->
+    <div class="group-banner impact" style="margin-top:10px">
+      <span class="group-emoji">🌍</span>
+      <div><div class="group-name">Impact Awards</div><div class="group-desc">Academy-selected — not open for public nomination</div></div>
+    </div>
+
+    <div class="award-block" style="opacity:.6">
+      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+      <div class="award-name" style="margin-bottom:4px">Ballroom Impact Award</div>
+      <div class="award-tagline">"For the one who shifted the scene — period."</div>
+      <p style="font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px">Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
+    </div>
+
+    <div class="award-block" style="opacity:.6">
+      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+      <div class="award-name" style="margin-bottom:4px">Community Impact Award</div>
+      <div class="award-tagline">"For the one doing real work for the people."</div>
+      <p style="font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px">Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
+    </div>
+
+  </div>
+
+  <!-- 03: SUPPORTING STATEMENT -->
+  <div>
+    <div class="section-hd">
+      <div class="section-num">03</div>
+      <div><div class="section-tag">Statement</div><div class="section-title">Supporting Statement</div></div>
+    </div>
+    <p class="section-sub">Make the case for your nominee. Why do they deserve this recognition in WNY Ballroom?</p>
+    <div class="card">
+      <div class="field">
+        <label class="field-label" for="statement">Why does this nominee deserve this award?</label>
+        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')"></textarea>
+        <div class="char-counter" id="statCount">0 / 500</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04: CONFIRMATIONS -->
+  <div>
+    <div class="section-hd">
+      <div class="section-num">04</div>
+      <div><div class="section-tag">Acknowledgment</div><div class="section-title">Eligibility &amp; Integrity</div></div>
+    </div>
+    <div class="card">
+      <div class="check-group">
+        <label class="check-item">
+          <input type="checkbox" id="chk1">
+          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between May 4, 2025 and May 4, 2026.</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk2">
+          <span class="check-text">I confirm the <strong>information I've provided is accurate</strong> to the best of my knowledge.</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk3">
+          <span class="check-text">I acknowledge that <strong>The People's Choice Academy</strong> may verify, adjust, or remove any submission to protect the integrity of this process.</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk4">
+          <span class="check-text">I am submitting this nomination <strong>in good faith</strong> — not to create drama, popularity contests, or division in the community.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-wrap">
+    <button type="button" id="submitBtn" class="btn-submit" onclick="submitForm()">Submit Nomination</button>
+    <p class="submit-note">
+      Nominations close <strong>June 1, 2026</strong> &nbsp;·&nbsp; Top 5 announced <strong>June 8, 2026</strong><br>
+      One nomination per submission. Submit again to nominate in another category.
+    </p>
+    <div id="submitError"><p></p></div>
+  </div>
+
+</form>
+
+<!-- SUCCESS -->
+<div id="successMsg">
+  <span class="success-trophy">🏆</span>
+  <h2>Nomination Received!</h2>
+  <p>
+    Your nomination is in. <strong>The People's Choice Academy</strong> will review all submissions
+    and announce the Top 5 in each category on <strong>June 8, 2026</strong>.<br><br>
+    Public voting opens <strong>June 10</strong> and runs through <strong>July 10, 2026</strong>.<br><br>
+    Winners announced live — <em>Saturday, July 25 · The CAZ · 2221 Seneca St.</em>
+  </p>
+</div>
+
+<footer>
+  <div class="footer-line"></div>
+  <p>The Banjees · People's Choice Awards<br>The CAZ · 2221 Seneca St. · July 25, 2026 · Doors 7:30 PM</p>
+</footer>
+
+</div>
+
+<script>
+function updateCounter(el, id) {
+  const len = el.value.length;
+  const max = parseInt(el.getAttribute('maxlength'));
+  const c = document.getElementById(id);
+  c.textContent = len + ' / ' + max;
+  c.classList.toggle('warn', len >= max * 0.85 && len < max);
+  c.classList.toggle('over', len >= max);
+}
+
+function showError(msg) {
+  const el = document.getElementById('submitError');
+  el.querySelector('p').textContent = msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function hideError() {
+  document.getElementById('submitError').style.display = 'none';
+}
+
+async function submitForm() {
+  const name    = document.getElementById('nom-name').value.trim();
+  const contact = document.getElementById('nom-contact').value.trim();
+  const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
+
+  if (!name || !contact) {
+    showError('Please enter your name and contact info before submitting.');
+    return;
+  }
+  if (chks.includes(false)) {
+    showError('Please check all four acknowledgment boxes before submitting.');
+    return;
+  }
+  hideError();
+
+  // Build FormData from all named fields
+  const fd = new FormData();
+  document.querySelectorAll('[name]').forEach(el => {
+    const val = el.value.trim();
+    if (val) fd.append(el.name, val);
+  });
+  fd.append('All Acknowledgments Confirmed', 'Yes');
+
+  const btn  = document.getElementById('submitBtn');
+  const orig = btn.textContent;
+  btn.textContent = 'Submitting…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xojbvvnz', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      document.getElementById('nominationForm').style.display = 'none';
+      const s = document.getElementById('successMsg');
+      s.style.display = 'block';
+      s.style.animation = 'fadeUp .6s ease both';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      let msg = 'Submission failed. Please try again.';
+      try {
+        const data = await res.json();
+        if (data?.errors?.length) msg = data.errors.map(e => e.message).join(', ');
+      } catch(_) {}
+      showError(msg);
+      btn.textContent = orig;
+      btn.disabled = false;
+    }
+  } catch(err) {
+    showError('Network error — please check your connection and try again.');
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
