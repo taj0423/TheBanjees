@@ -79,9 +79,12 @@ form{display:flex;flex-direction:column;gap:36px}
 .field-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
 .field-label .opt{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.66rem;letter-spacing:0;text-transform:none;color:rgba(154,144,128,.5);margin-left:6px}
 input[type=text],select,textarea{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--text);font-family:'Libre Baskerville',serif;font-size:.92rem;padding:10px 14px;outline:none;width:100%;border-radius:1px;transition:border-color .22s,background .22s,box-shadow .22s}
+input[type=file]{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--muted);font-family:'Libre Baskerville',serif;font-size:.86rem;padding:10px 12px;outline:none;width:100%;border-radius:1px}
+input[type=file]::file-selector-button{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--deep);background:var(--gold);border:0;padding:8px 12px;margin-right:12px;cursor:pointer}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
 input::placeholder,textarea::placeholder{color:rgba(138,128,112,.4);font-style:italic}
 textarea{resize:vertical;min-height:90px;line-height:1.7}
+.field-help{font-size:.76rem;color:var(--muted);font-style:italic;line-height:1.7}
 .char-counter{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:1px;color:rgba(154,144,128,.5);text-align:right;margin-top:4px;transition:color .2s}
 .char-counter.warn{color:var(--gold)}
 .char-counter.over{color:var(--red-bright)}
@@ -89,10 +92,11 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 /* GROUP BANNERS */
 .group-banner{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:0}
 .group-banner.peoples{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(100,70,0,.1));border:1px solid rgba(201,168,76,.3)}
-.group-banner.event  {background:linear-gradient(135deg,rgba(123,47,190,.18),rgba(60,0,100,.1));border:1px solid rgba(123,47,190,.28);margin-top:10px}
-.group-banner.perf   {background:linear-gradient(135deg,rgba(0,144,176,.18),rgba(0,60,100,.1));border:1px solid rgba(0,144,176,.28);margin-top:10px}
-.group-banner.person {background:linear-gradient(135deg,rgba(90,138,42,.18),rgba(30,60,0,.1));border:1px solid rgba(90,138,42,.28);margin-top:10px}
-.group-banner.impact {background:linear-gradient(135deg,rgba(204,16,16,.18),rgba(100,0,0,.1));border:1px solid rgba(204,16,16,.28);margin-top:10px}
+.group-banner.event  {background:linear-gradient(135deg,rgba(123,47,190,.18),rgba(60,0,100,.1));border:1px solid rgba(123,47,190,.28)}
+.group-banner.perf   {background:linear-gradient(135deg,rgba(0,144,176,.18),rgba(0,60,100,.1));border:1px solid rgba(0,144,176,.28)}
+.group-banner.person {background:linear-gradient(135deg,rgba(90,138,42,.18),rgba(30,60,0,.1));border:1px solid rgba(90,138,42,.28)}
+.group-banner.impact {background:linear-gradient(135deg,rgba(204,16,16,.18),rgba(100,0,0,.1));border:1px solid rgba(204,16,16,.28)}
+.group-banner.spaced{margin-top:10px}
 .group-emoji{font-size:18px;flex-shrink:0}
 .group-name{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase}
 .group-banner.peoples .group-name{color:var(--gold-light)}
@@ -111,7 +115,10 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 .award-block.locked p{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .award-num{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
 .award-name{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);margin-bottom:3px}
+.award-name.compact{margin-bottom:4px}
 .award-tagline{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.8rem;color:var(--gold);margin-bottom:14px}
+.award-block.locked{opacity:.6}
+.locked-description{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .criteria-title{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:7px}
 .criteria-list{list-style:none;display:flex;flex-direction:column;gap:4px}
 .criteria-list li{font-size:.81rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.55}
@@ -198,8 +205,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
 </div>
 
-<form name="nomination" method="post" data-netlify="true" id="nominationForm">
-  <input type="hidden" name="form-name" value="nomination">
+<form id="nominationForm" onsubmit="submitForm(); return false;">
 
   <!-- 01: YOUR INFO -->
   <div>
@@ -265,7 +271,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ EVENT-BASED ═══ -->
-    <div class="group-banner event">
+    <div class="group-banner event spaced">
       <span class="group-emoji">🎪</span>
       <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
     </div>
@@ -345,7 +351,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ PERFORMANCE-BASED ═══ -->
-    <div class="group-banner perf">
+    <div class="group-banner perf spaced">
       <span class="group-emoji">🎬</span>
       <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
     </div>
@@ -369,6 +375,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Battle of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Battle of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -389,6 +399,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Effect of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Effect of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -408,6 +422,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="sub-field">
         <span class="sub-label">Clip Link <span class="opt">strongly recommended</span></span>
         <input type="text" class="nominee-field" name="Clip of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Clip of the Year — Clip Upload" accept="video/*">
       </div>
     </div>
 
@@ -430,10 +448,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip or Reference Link <span class="opt">optional</span></span>
         <input type="text" class="nominee-field" name="Most Memeable Moment — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Most Memeable Moment — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <!-- ═══ PERSON-BASED ═══ -->
-    <div class="group-banner person">
+    <div class="group-banner person spaced">
       <span class="group-emoji">🌟</span>
       <div><div class="group-name">Person-Based Awards</div><div class="group-desc">Individuals who showed up, judged fairly, and led with integrity</div></div>
     </div>
@@ -521,23 +543,47 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ IMPACT AWARDS ═══ -->
-    <div class="group-banner impact">
+    <div class="group-banner impact spaced">
       <span class="group-emoji">🌍</span>
-      <div><div class="group-name">Impact Awards</div><div class="group-desc">Academy-selected — not open for public nomination</div></div>
+      <div><div class="group-name">Impact Awards</div><div class="group-desc">Honoring long-term contributions and community care — open to all nominations</div></div>
     </div>
 
-    <div class="award-block locked">
-      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+    <div class="award-block">
+      <div class="award-num">Award 14 · Impact-Based</div>
       <div class="award-name">Ballroom Impact Award</div>
       <div class="award-tagline">"For the one who shifted the scene — period."</div>
-      <p>Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Long-term impact, influence, and contribution to WNY Ballroom culture</li>
+        <li>Consistency, dedication, and leadership over the years</li>
+        <li>A lasting legacy that has fundamentally shaped the scene</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate for Ballroom Impact Award</span>
+      <input type="text" class="nominee-field" name="Ballroom Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Ballroom Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
     </div>
 
-    <div class="award-block locked">
-      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+    <div class="award-block">
+      <div class="award-num">Award 15 · Impact-Based</div>
       <div class="award-name">Community Impact Award</div>
       <div class="award-tagline">"For the one doing real work for the people."</div>
-      <p>Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Community care, advocacy, and work both inside and outside the ballroom floor</li>
+        <li>Active support, empowerment, and care for others in the community</li>
+        <li>Uplifting the community and navigating conflict with positive contribution</li>
+      </ul>
+      <div class="award-divider"></div>
+      <span class="nominate-label">Nominate for Community Impact Award</span>
+      <input type="text" class="nominee-field" name="Community Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
+        <input type="text" class="nominee-field" name="Community Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
     </div>
 
   </div>
@@ -552,8 +598,13 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     <div class="card">
       <div class="field">
         <label class="field-label" for="statement">Why does this nominee deserve this award?</label>
-        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')"></textarea>
+        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')" required></textarea>
         <div class="char-counter" id="statCount">0 / 500</div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="video-evidence">Video Evidence <span class="opt">optional</span></label>
+        <input type="file" id="video-evidence" name="Video Evidence" accept="video/*">
+        <p class="field-help">Upload one video clip if it helps verify the nomination. Links can still be added in the category fields above.</p>
       </div>
     </div>
   </div>
@@ -641,23 +692,49 @@ function hideError() {
 async function submitForm() {
   const name    = document.getElementById('nom-name').value.trim();
   const contact = document.getElementById('nom-contact').value.trim();
+  const statement = document.getElementById('statement').value.trim();
+  const video = document.getElementById('video-evidence').files[0];
   const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
+  const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
+    .some(el => el.type !== 'file' && el.value.trim());
 
   if (!name || !contact) {
     showError('Please enter your name and contact info before submitting.');
+    return;
+  }
+  if (!hasNomination) {
+    showError('Please answer at least one award nomination question before submitting.');
+    return;
+  }
+  if (!statement) {
+    showError('Please answer the supporting statement question before submitting.');
     return;
   }
   if (chks.includes(false)) {
     showError('Please check all four acknowledgment boxes before submitting.');
     return;
   }
+  const fileInputs = document.querySelectorAll('input[type="file"]');
+  for (const input of fileInputs) {
+    const file = input.files[0];
+    if (file && !file.type.startsWith('video/')) {
+      if (input.id === 'video-evidence') {
+        showError('Please upload a valid video file.');
+      } else {
+        showError(`Please upload a valid video file for ${input.name.replace(' — Clip Upload', '')}.`);
+      }
+      return;
+    }
+  }
   hideError();
 
-  // Build FormData from all named fields
   const fd = new FormData();
   document.querySelectorAll('[name]').forEach(el => {
-    const val = el.value.trim();
-    if (val) fd.append(el.name, val);
+    if (el.type === 'file') {
+      if (el.files[0]) fd.append(el.name, el.files[0]);
+      return;
+    }
+    fd.append(el.name, el.value.trim());
   });
   fd.append('All Acknowledgments Confirmed', 'Yes');
 
@@ -667,10 +744,9 @@ async function submitForm() {
   btn.disabled = true;
 
   try {
-    const res = await fetch('/', {
+    const res = await fetch('/api/nomination', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(fd).toString()
+      body: fd
     });
 
     if (res.ok) {
@@ -681,6 +757,10 @@ async function submitForm() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       let msg = 'Submission failed. Please try again.';
+      try {
+        const data = await res.json();
+        if (data?.error) msg = data.error;
+      } catch(_) {}
       showError(msg);
       btn.textContent = orig;
       btn.disabled = false;
