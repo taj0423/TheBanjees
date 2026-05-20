@@ -88,6 +88,7 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 
 /* GROUP BANNERS */
 .group-banner{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:0}
+.group-banner.offset{margin-top:10px}
 .group-banner.peoples{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(100,70,0,.1));border:1px solid rgba(201,168,76,.3)}
 .group-banner.event  {background:linear-gradient(135deg,rgba(123,47,190,.18),rgba(60,0,100,.1));border:1px solid rgba(123,47,190,.28)}
 .group-banner.perf   {background:linear-gradient(135deg,rgba(0,144,176,.18),rgba(0,60,100,.1));border:1px solid rgba(0,144,176,.28)}
@@ -106,9 +107,12 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 .award-block{background:var(--card2);border:1px solid rgba(201,168,76,.1);border-top:none;padding:20px 20px 22px;margin-bottom:10px;position:relative}
 .award-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.2),transparent)}
 .award-block:last-of-type{margin-bottom:0}
+.award-block.locked{opacity:.6}
 .award-num{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
 .award-name{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);margin-bottom:3px}
+.award-name.compact{margin-bottom:4px}
 .award-tagline{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.8rem;color:var(--gold);margin-bottom:14px}
+.award-copy{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .criteria-title{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:7px}
 .criteria-list{list-style:none;display:flex;flex-direction:column;gap:4px}
 .criteria-list li{font-size:.81rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.55}
@@ -195,7 +199,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
 </div>
 
-<form id="nominationForm">
+<form id="nominationForm" onsubmit="submitForm(event)">
 
   <!-- 01: YOUR INFO -->
   <div>
@@ -261,7 +265,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ EVENT-BASED ═══ -->
-    <div class="group-banner event" style="margin-top:10px">
+    <div class="group-banner event offset">
       <span class="group-emoji">🎪</span>
       <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
     </div>
@@ -341,7 +345,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ PERFORMANCE-BASED ═══ -->
-    <div class="group-banner perf" style="margin-top:10px">
+    <div class="group-banner perf offset">
       <span class="group-emoji">🎬</span>
       <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
     </div>
@@ -429,7 +433,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ PERSON-BASED ═══ -->
-    <div class="group-banner person" style="margin-top:10px">
+    <div class="group-banner person offset">
       <span class="group-emoji">🌟</span>
       <div><div class="group-name">Person-Based Awards</div><div class="group-desc">Individuals who showed up, judged fairly, and led with integrity</div></div>
     </div>
@@ -517,23 +521,23 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ IMPACT AWARDS ═══ -->
-    <div class="group-banner impact" style="margin-top:10px">
+    <div class="group-banner impact offset">
       <span class="group-emoji">🌍</span>
       <div><div class="group-name">Impact Awards</div><div class="group-desc">Academy-selected — not open for public nomination</div></div>
     </div>
 
-    <div class="award-block" style="opacity:.6">
+    <div class="award-block locked">
       <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
-      <div class="award-name" style="margin-bottom:4px">Ballroom Impact Award</div>
+      <div class="award-name compact">Ballroom Impact Award</div>
       <div class="award-tagline">"For the one who shifted the scene — period."</div>
-      <p style="font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px">Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
+      <p class="award-copy">Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
     </div>
 
-    <div class="award-block" style="opacity:.6">
+    <div class="award-block locked">
       <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
-      <div class="award-name" style="margin-bottom:4px">Community Impact Award</div>
+      <div class="award-name compact">Community Impact Award</div>
       <div class="award-tagline">"For the one doing real work for the people."</div>
-      <p style="font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px">Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
+      <p class="award-copy">Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
     </div>
 
   </div>
@@ -584,7 +588,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
   <!-- SUBMIT -->
   <div class="submit-wrap">
-    <button type="button" id="submitBtn" class="btn-submit" onclick="submitForm()">Submit Nomination</button>
+    <button type="submit" id="submitBtn" class="btn-submit">Submit Nomination</button>
     <p class="submit-note">
       Nominations close <strong>June 1, 2026</strong> &nbsp;·&nbsp; Top 5 announced <strong>June 8, 2026</strong><br>
       One nomination per submission. Submit again to nominate in another category.
@@ -634,7 +638,8 @@ function hideError() {
   document.getElementById('submitError').style.display = 'none';
 }
 
-async function submitForm() {
+async function submitForm(event) {
+  if (event) event.preventDefault();
   const name    = document.getElementById('nom-name').value.trim();
   const contact = document.getElementById('nom-contact').value.trim();
   const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
