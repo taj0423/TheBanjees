@@ -1,5 +1,6 @@
 import { getStore } from '@netlify/blobs';
 import { getDatabase } from '@netlify/database';
+import { sendToGoogleSheets } from './googleSheets.mjs';
 
 const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
 const CHECKBOX_FIELD = 'All Acknowledgments Confirmed';
@@ -125,6 +126,12 @@ export default async (request) => {
       )
       RETURNING id
     `;
+
+    try {
+      await sendToGoogleSheets(saved.id, answers, videoInfo);
+    } catch (gErr) {
+      console.error('Failed to send data to Google Sheets:', gErr);
+    }
 
     return json({ ok: true, id: saved.id }, { status: 201 });
   } catch (err) {

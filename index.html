@@ -169,6 +169,168 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 #successMsg p{color:var(--muted);font-style:italic;line-height:1.9;font-size:.9rem}
 #successMsg strong{color:var(--gold-light);font-style:normal}
 
+/* MODAL POPUP */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 11, 14, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  background: var(--card);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(201, 168, 76, 0.05);
+  animation: modalReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  padding: 40px 28px 30px;
+  text-align: center;
+}
+@keyframes modalReveal {
+  from {
+    transform: scale(0.95) translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+.modal-gild-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold-light), var(--gold), transparent);
+}
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+.modal-close:hover {
+  color: var(--gold-light);
+  transform: scale(1.1);
+}
+.success-icon {
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.3));
+  animation: starPulse 2.5s infinite alternate ease-in-out;
+}
+@keyframes starPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(201,168,76,0.2)); }
+  100% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(201,168,76,0.55)); }
+}
+.modal-body h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--gold-pale), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+.modal-divider {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-dim);
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 18px;
+}
+.modal-text {
+  color: var(--text);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.modal-dates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.date-card {
+  background: rgba(201, 168, 76, 0.03);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 14px 10px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.date-card:hover {
+  border-color: rgba(201, 168, 76, 0.35);
+}
+.date-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 4px;
+}
+.date-value {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+.modal-footer-text {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-bottom: 24px;
+}
+.modal-action-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--deep);
+  background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold-light) 35%, var(--gold) 65%, #8A6010 100%);
+  border: none;
+  padding: 12px 36px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.modal-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.25);
+}
+.btn-nominate-again {
+  margin-top: 32px !important;
+  font-size: 0.74rem !important;
+  padding: 12px 28px !important;
+}
+
 /* FOOTER */
 footer{text-align:center;padding:36px 0 0;position:relative;z-index:1}
 .footer-line{width:60px;height:3px;background:var(--red-bright);margin:0 auto 12px}
@@ -659,6 +821,54 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     Public voting opens <strong>June 10</strong> and runs through <strong>July 10, 2026</strong>.<br><br>
     Winners announced live — <em>Saturday, July 25 · The CAZ · 2221 Seneca St.</em>
   </p>
+  <button type="button" class="btn-submit btn-nominate-again" onclick="resetFormForNewSubmission()">Nominate in another category</button>
+</div>
+
+<!-- SUCCESS MODAL POPUP -->
+<div id="successModal" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+    <div class="modal-gild-border"></div>
+    <div class="modal-body">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M12 2L14.4 7.1L20 7.9L16 11.8L16.9 17.4L12 14.8L7.1 17.4L8 11.8L4 7.9L9.6 7.1L12 2Z" fill="url(#goldGradient)" stroke="url(#goldGradientDim)" stroke-width="1"/>
+          <path d="M6 9H4.5C3.12 9 2 10.12 2 11.5V12C2 13.1 2.9 14 4 14H6V9ZM18 9H19.5C20.88 9 22 10.12 22 11.5V12C22 13.1 21.1 14 20 14H18V9ZM12 15V18M9 21H15M8 6V4H16V6" stroke="url(#goldGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--gold-pale)" />
+              <stop offset="50%" stop-color="var(--gold-light)" />
+              <stop offset="100%" stop-color="var(--gold)" />
+            </linearGradient>
+            <linearGradient id="goldGradientDim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--gold)" />
+              <stop offset="100%" stop-color="var(--gold-dim)" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2>Nomination Received!</h2>
+      <div class="modal-divider">✦ ✦ ✦</div>
+      <p class="modal-text">
+        Your nomination is in. <strong>The People's Choice Academy</strong> will review all submissions
+        and announce the Top 5 in each category on <strong>June 8, 2026</strong>.
+      </p>
+      <div class="modal-dates-grid">
+        <div class="date-card">
+          <span class="date-label">Public Voting</span>
+          <span class="date-value">June 10 – July 10</span>
+        </div>
+        <div class="date-card">
+          <span class="date-label">Winners Live</span>
+          <span class="date-value">Saturday, July 25</span>
+        </div>
+      </div>
+      <p class="modal-footer-text">
+        Winners announced live at <em>The CAZ · 2221 Seneca St.</em>
+      </p>
+      <button type="button" class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -760,6 +970,7 @@ async function submitForm() {
       s.style.display = 'block';
       s.style.animation = 'fadeUp .6s ease both';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      openModal();
     } else {
       let msg = 'Submission failed. Please try again.';
       try {
@@ -775,6 +986,50 @@ async function submitForm() {
     btn.textContent = orig;
     btn.disabled = false;
   }
+}
+
+function openModal() {
+  const modal = document.getElementById('successModal');
+  modal.style.display = 'flex';
+  // Force reflow
+  modal.offsetHeight;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('successModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 400);
+}
+
+function resetFormForNewSubmission() {
+  const form = document.getElementById('nominationForm');
+  form.reset();
+  form.style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+  
+  // Clear any existing errors
+  hideError();
+  
+  // Reset character counter
+  const countEl = document.getElementById('statCount');
+  if (countEl) {
+    countEl.textContent = '0 / 500';
+    countEl.className = 'char-counter';
+  }
+  
+  // Restore submit button state
+  const btn = document.getElementById('submitBtn');
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Nomination';
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.getElementById('nominationForm').addEventListener('submit', function(e) {
