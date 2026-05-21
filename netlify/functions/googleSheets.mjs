@@ -71,7 +71,7 @@ async function appendToGoogleSheet(accessToken, spreadsheetId, range, values) {
 export async function sendToGoogleSheets(id, answers, videoInfo) {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
   const privateKey = process.env.GOOGLE_PRIVATE_KEY;
-  const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID;
+  const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID || '1XUfCuOhUefXCQbYm4RsWBs4fTadaFEc74s8nsKJEPpA';
   const range = process.env.GOOGLE_SHEETS_RANGE || 'Sheet1!A1';
 
   if (!email || !privateKey || !spreadsheetId) {
