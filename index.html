@@ -360,14 +360,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 </header>
 
 <div class="elig-banner">
-  <p><strong>Nomination Period:</strong> May 8 – June 1, 2026 &nbsp;·&nbsp; <strong>Eligibility Window:</strong> May 4, 2025 – May 4, 2026<br>
+  <p><strong>Nomination Period:</strong> May 8 – June 1, 2026 &nbsp;·&nbsp; <strong>Eligibility Window:</strong> January 1, 2025 – May 30, 2026<br>
   All nominees must have <strong>actively participated in WNY Ballroom</strong> during the eligibility period. Top 5 per category announced by <strong>The People's Choice Academy</strong> on <strong>June 8, 2026</strong>. Public voting opens <strong>June 10</strong>.</p>
 </div>
 <div class="integrity-note">
   <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
 </div>
 
-<form id="nominationForm" onsubmit="submitForm(); return false;">
+<form id="nominationForm">
 
   <!-- 01: YOUR INFO -->
   <div>
@@ -383,8 +383,8 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
           <input type="text" id="nom-name" name="Nominator Name" placeholder="Ballroom or legal name" maxlength="100" required>
         </div>
         <div class="field">
-          <label class="field-label" for="nom-contact">Email or Phone</label>
-          <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
+          <label class="field-label" for="nom-contact">Email Address</label>
+          <input type="email" id="nom-contact" name="Nominator Contact" placeholder="your.name@example.com" maxlength="100" required>
         </div>
       </div>
       <div class="field">
@@ -721,11 +721,11 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <li>A lasting legacy that has fundamentally shaped the scene</li>
       </ul>
       <div class="award-divider"></div>
-      <span class="nominate-label">Nominate for Ballroom Impact Award</span>
-      <input type="text" class="nominee-field" name="Ballroom Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <label class="nominate-label" for="ballroom-impact-nominee">Nominate for Ballroom Impact Award</label>
+      <input type="text" class="nominee-field" id="ballroom-impact-nominee" name="Ballroom Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
       <div class="sub-field">
-        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
-        <input type="text" class="nominee-field" name="Ballroom Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+        <label class="sub-label" for="ballroom-impact-house">House Affiliation <span class="opt">optional</span></label>
+        <input type="text" class="nominee-field" id="ballroom-impact-house" name="Ballroom Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
       </div>
     </div>
 
@@ -740,11 +740,11 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <li>Uplifting the community and navigating conflict with positive contribution</li>
       </ul>
       <div class="award-divider"></div>
-      <span class="nominate-label">Nominate for Community Impact Award</span>
-      <input type="text" class="nominee-field" name="Community Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <label class="nominate-label" for="community-impact-nominee">Nominate for Community Impact Award</label>
+      <input type="text" class="nominee-field" id="community-impact-nominee" name="Community Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
       <div class="sub-field">
-        <span class="sub-label">House Affiliation <span class="opt">optional</span></span>
-        <input type="text" class="nominee-field" name="Community Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+        <label class="sub-label" for="community-impact-house">House Affiliation <span class="opt">optional</span></label>
+        <input type="text" class="nominee-field" id="community-impact-house" name="Community Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
       </div>
     </div>
 
@@ -781,7 +781,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="check-group">
         <label class="check-item">
           <input type="checkbox" id="chk1">
-          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between May 4, 2025 and May 4, 2026.</span>
+          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between January 1, 2025 and May 30, 2026.</span>
         </label>
         <label class="check-item">
           <input type="checkbox" id="chk2">
@@ -908,8 +908,13 @@ async function submitForm() {
   const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
     .some(el => el.type !== 'file' && el.value.trim());
 
-  if (!name || !contact) {
-    showError('Please enter your name and contact info before submitting.');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!name) {
+    showError('Please enter your name before submitting.');
+    return;
+  }
+  if (!contact || !emailRegex.test(contact)) {
+    showError('Please enter a valid email address.');
     return;
   }
   if (!hasNomination) {

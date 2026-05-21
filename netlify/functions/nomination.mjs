@@ -57,8 +57,12 @@ export default async (request) => {
         && value;
     });
 
-    if (!nominatorName || !nominatorContact) {
-      return json({ error: 'Please enter your name and contact info before submitting.' }, { status: 400 });
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!nominatorName) {
+      return json({ error: 'Please enter your name before submitting.' }, { status: 400 });
+    }
+    if (!nominatorContact || !emailRegex.test(nominatorContact)) {
+      return json({ error: 'Please enter a valid email address.' }, { status: 400 });
     }
     if (!hasNomination) {
       return json({ error: 'Please answer at least one award nomination question before submitting.' }, { status: 400 });
@@ -130,7 +134,8 @@ export default async (request) => {
     }
 
     return json({ ok: true, id: saved.id }, { status: 201 });
-  } catch {
+  } catch (err) {
+    console.error('Submission error:', err);
     return json({ error: 'Submission could not be saved. Please try again.' }, { status: 500 });
   }
 };
