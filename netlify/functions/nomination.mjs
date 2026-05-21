@@ -7,6 +7,38 @@ const CHECKBOX_FIELD = 'All Acknowledgments Confirmed';
 const VIDEO_FIELD = 'Video Evidence';
 
 const json = (body, init = {}) => Response.json(body, init);
+const NOMINATION_META_FIELDS = new Set([
+  'Nominator Name',
+  'Nominator Contact',
+  'Nominator Affiliation',
+  'Supporting Statement',
+  CHECKBOX_FIELD,
+]);
+
+const parseNominationSummary = (answers) => {
+  const entry = Object.entries(answers).find(([key, value]) => {
+    return !NOMINATION_META_FIELDS.has(key) && !key.includes(' — Clip') && String(value || '').trim();
+  });
+
+  if (!entry) {
+    return { category: 'Uncategorized', nominee: 'Nominee pending review' };
+  }
+
+  const [key, value] = entry;
+  const [category] = key.split(' — ');
+  return {
+    category: category || 'Uncategorized',
+    nominee: String(value).trim(),
+  };
+};
+
+const adminTokenMatches = (request) => {
+  const expected = process.env.ADMIN_REVIEW_TOKEN;
+  if (!expected) return false;
+
+  const supplied = request.headers.get('x-admin-token') || '';
+  return supplied === expected;
+};
 
 const safeFilename = (name) => {
   const cleaned = String(name || 'video').replace(/[^a-zA-Z0-9._-]/g, '-').replace(/-+/g, '-');
@@ -14,6 +46,59 @@ const safeFilename = (name) => {
 };
 
 export default async (request) => {
+  const db = getDatabase();
+
+  if (request.method === 'GET') {
+    const url = new URL(request.url);
+    const admin = url.searchParams.get('admin') === '1' && adminTokenMatches(request);
+
+    if (url.searchParams.get('admin') === '1' && !admin) {
+      return json({ error: 'Admin review is unavailable without a valid review token.' }, { status: 401 });
+    }
+
+    const rows = admin
+      ? await db.sql`
+          SELECT id, nominator_name, nominator_contact, category, nominee_display, answers, status, vote_count, created_at
+          FROM nominations
+          ORDER BY created_at DESC
+          LIMIT 200
+        `
+      : await db.sql`
+          SELECT id, category, nominee_display, vote_count, created_at
+          FROM nominations
+          WHERE status = 'approved'
+          ORDER BY vote_count DESC, created_at DESC
+          LIMIT 200
+        `;
+
+    return json({ nominations: rows });
+  }
+
+  if (request.method === 'PATCH') {
+    if (!adminTokenMatches(request)) {
+      return json({ error: 'A valid review token is required.' }, { status: 401 });
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const status = body.status === 'approved' ? 'approved' : body.status === 'rejected' ? 'rejected' : null;
+    if (!body.id || !status) {
+      return json({ error: 'A nomination id and valid status are required.' }, { status: 400 });
+    }
+
+    const [updated] = await db.sql`
+      UPDATE nominations
+      SET status = ${status}, reviewed_at = NOW()
+      WHERE id = ${body.id}
+      RETURNING id, status
+    `;
+
+    if (!updated) {
+      return json({ error: 'Nomination not found.' }, { status: 404 });
+    }
+
+    return json({ ok: true, nomination: updated });
+  }
+
   if (request.method !== 'POST') {
     return json({ error: 'Method not allowed.' }, { status: 405 });
   }
@@ -102,13 +187,15 @@ export default async (request) => {
     }
 
     const id = crypto.randomUUID();
-    const db = getDatabase();
+    const summary = parseNominationSummary(answers);
     const [saved] = await db.sql`
       INSERT INTO nominations (
         id,
         nominator_name,
         nominator_contact,
         answers,
+        category,
+        nominee_display,
         video_key,
         video_filename,
         video_content_type,
@@ -119,6 +206,8 @@ export default async (request) => {
         ${nominatorName},
         ${nominatorContact},
         ${JSON.stringify(answers)}::jsonb,
+        ${summary.category},
+        ${summary.nominee},
         ${videoInfo.key},
         ${videoInfo.filename},
         ${videoInfo.contentType},
