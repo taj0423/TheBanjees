@@ -65,6 +65,7 @@ form{display:flex;flex-direction:column;gap:36px}
 .section-tag{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:4px;color:var(--red-bright);text-transform:uppercase;margin-bottom:2px}
 .section-title{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);letter-spacing:.5px}
 .section-sub{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:16px;line-height:1.6}
+.section-sub.flush{margin-bottom:0}
 
 /* CARDS */
 .card{background:var(--card);border:1px solid rgba(201,168,76,.12);padding:22px 22px 18px;position:relative}
@@ -168,6 +169,43 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 #successMsg h2{font-family:'Cinzel Decorative',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
 #successMsg p{color:var(--muted);font-style:italic;line-height:1.9;font-size:.9rem}
 #successMsg strong{color:var(--gold-light);font-style:normal}
+
+/* INTERACTIVE APP LAYERS */
+.app-panel{background:rgba(28,30,38,.82);border:1px solid rgba(201,168,76,.14);padding:18px;margin-bottom:24px;position:relative}
+.app-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim),transparent)}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.count-box{border:1px solid rgba(201,168,76,.16);background:rgba(255,255,255,.025);padding:12px 8px;text-align:center}
+.count-num{display:block;font-family:'Cinzel Decorative',serif;font-size:1.35rem;color:var(--gold-light);line-height:1}
+.count-label{display:block;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 24px}
+.step-pill{border:1px solid rgba(201,168,76,.16);background:rgba(255,255,255,.025);color:var(--muted);font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;cursor:pointer}
+.step-pill.active{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,.08)}
+.step-pill.complete{border-color:rgba(90,138,42,.44);color:#A0D060}
+.form-step{display:none}
+.form-step.active{display:block;animation:fadeUp .36s ease both}
+.step-actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.btn-secondary{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.22);padding:12px 20px;cursor:pointer}
+.btn-secondary:disabled{opacity:.45;cursor:not-allowed}
+.upload-preview{display:none;margin-top:9px;border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.025);padding:10px;color:var(--muted);font-size:.78rem;line-height:1.6}
+.upload-preview video{display:block;width:100%;max-height:180px;margin-top:8px;background:#0A0B0E}
+.directory-controls{display:grid;grid-template-columns:1fr 180px;gap:10px;margin-top:16px}
+.nominee-grid{display:grid;gap:12px;margin-top:16px}
+.nominee-card{border:1px solid rgba(201,168,76,.14);background:rgba(22,24,32,.88);padding:16px}
+.nominee-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.nominee-name{font-family:'Cinzel',serif;color:var(--gold-light);font-size:.9rem;font-weight:700}
+.nominee-category{font-family:'Cinzel',serif;color:var(--muted);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;margin-top:5px}
+.vote-btn{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--deep);background:var(--gold);border:0;padding:9px 13px;cursor:pointer;white-space:nowrap}
+.vote-btn:disabled{opacity:.55;cursor:not-allowed}
+.progress-track{height:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.12);margin-top:12px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));transition:width .35s}
+.vote-count{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:8px}
+.empty-state,.inline-status{color:var(--muted);font-size:.82rem;font-style:italic;line-height:1.7;margin-top:12px}
+.admin-tools{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px}
+.review-list{display:grid;gap:10px;margin-top:14px}
+.review-card{border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.025);padding:14px}
+.review-meta{font-size:.76rem;color:var(--muted);line-height:1.7;margin-top:6px}
+.review-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+@media(max-width:620px){.countdown-grid,.stepper{grid-template-columns:repeat(2,1fr)}.directory-controls,.admin-tools{grid-template-columns:1fr}.step-actions{flex-direction:column}.btn-secondary,.btn-submit{width:100%}}
 
 /* MODAL POPUP */
 .modal-overlay {
@@ -367,10 +405,28 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
 </div>
 
+<section class="app-panel" aria-label="Countdown to nominations closing">
+  <div class="section-title">Nomination Countdown</div>
+  <p class="section-sub flush">Live timer to the June 1, 2026 nomination deadline.</p>
+  <div class="countdown-grid" id="countdown">
+    <div class="count-box"><span class="count-num" data-unit="days">0</span><span class="count-label">Days</span></div>
+    <div class="count-box"><span class="count-num" data-unit="hours">0</span><span class="count-label">Hours</span></div>
+    <div class="count-box"><span class="count-num" data-unit="minutes">0</span><span class="count-label">Minutes</span></div>
+    <div class="count-box"><span class="count-num" data-unit="seconds">0</span><span class="count-label">Seconds</span></div>
+  </div>
+</section>
+
+<nav class="stepper" aria-label="Nomination form steps">
+  <button type="button" class="step-pill active" data-step-jump="0">01 Info</button>
+  <button type="button" class="step-pill" data-step-jump="1">02 Category</button>
+  <button type="button" class="step-pill" data-step-jump="2">03 Statement</button>
+  <button type="button" class="step-pill" data-step-jump="3">04 Confirm</button>
+</nav>
+
 <form id="nominationForm">
 
   <!-- 01: YOUR INFO -->
-  <div>
+  <div class="form-step active" data-step="0">
     <div class="section-hd">
       <div class="section-num">01</div>
       <div><div class="section-tag">Nominator</div><div class="section-title">Your Information</div></div>
@@ -392,10 +448,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <input type="text" id="nom-affil" name="Nominator Affiliation" placeholder="House, Kiki house, or independent" maxlength="100">
       </div>
     </div>
+    <div class="step-actions">
+      <span></span>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
+    </div>
   </div>
 
   <!-- 02: AWARD CATEGORIES -->
-  <div>
+  <div class="form-step" data-step="1">
     <div class="section-hd">
       <div class="section-num">02</div>
       <div><div class="section-tag">Nomination</div><div class="section-title">Award Categories</div></div>
@@ -748,10 +808,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       </div>
     </div>
 
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
+    </div>
   </div>
 
   <!-- 03: SUPPORTING STATEMENT -->
-  <div>
+  <div class="form-step" data-step="2">
     <div class="section-hd">
       <div class="section-num">03</div>
       <div><div class="section-tag">Statement</div><div class="section-title">Supporting Statement</div></div>
@@ -769,10 +833,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <p class="field-help">Upload one video clip if it helps verify the nomination. Links can still be added in the category fields above.</p>
       </div>
     </div>
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
+    </div>
   </div>
 
   <!-- 04: CONFIRMATIONS -->
-  <div>
+  <div class="form-step" data-step="3">
     <div class="section-hd">
       <div class="section-num">04</div>
       <div><div class="section-tag">Acknowledgment</div><div class="section-title">Eligibility &amp; Integrity</div></div>
@@ -797,10 +865,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         </label>
       </div>
     </div>
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <span></span>
+    </div>
   </div>
 
   <!-- SUBMIT -->
-  <div class="submit-wrap">
+  <div class="submit-wrap form-step" data-step="3">
     <button type="submit" id="submitBtn" class="btn-submit">Submit Nomination</button>
     <p class="submit-note">
       Nominations close <strong>June 1, 2026</strong> &nbsp;·&nbsp; Top 5 announced <strong>June 8, 2026</strong><br>
@@ -810,6 +882,31 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   </div>
 
 </form>
+
+<section class="app-panel" aria-label="Approved nominee voting">
+  <div class="section-title">Nominee Directory &amp; Voting</div>
+  <p class="section-sub flush">Approved nominees appear here after review. Search by nominee or category, then vote once per browser.</p>
+  <div class="directory-controls">
+    <input type="text" id="nomineeSearch" placeholder="Search nominees or categories">
+    <select id="categoryFilter" aria-label="Filter nominees by category">
+      <option value="">All Categories</option>
+    </select>
+  </div>
+  <div id="nomineeDirectory" class="nominee-grid">
+    <p class="empty-state">Loading approved nominees...</p>
+  </div>
+</section>
+
+<section class="app-panel" aria-label="Admin review dashboard">
+  <div class="section-title">Admin Review Dashboard</div>
+  <p class="section-sub flush">Enter the review token configured in Netlify to approve or reject nominations.</p>
+  <div class="admin-tools">
+    <input type="password" id="adminToken" placeholder="Review token" autocomplete="off">
+    <button type="button" class="btn-secondary" id="loadAdmin">Load Review Queue</button>
+  </div>
+  <div id="adminStatus" class="inline-status"></div>
+  <div id="reviewList" class="review-list"></div>
+</section>
 
 <!-- SUCCESS -->
 <div id="successMsg">
@@ -1030,12 +1127,228 @@ function resetFormForNewSubmission() {
   }
   
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  showStep(0);
+  renderUploadPreviews();
 }
+
+let currentStep = 0;
+let approvedNominees = [];
+
+function showStep(step) {
+  currentStep = Math.max(0, Math.min(3, step));
+  document.querySelectorAll('.form-step').forEach(el => {
+    el.classList.toggle('active', Number(el.dataset.step) === currentStep);
+  });
+  document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+    pill.classList.toggle('active', idx === currentStep);
+    pill.classList.toggle('complete', idx < currentStep);
+  });
+  hideError();
+  document.querySelector('.stepper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function validateStep(step) {
+  const name = document.getElementById('nom-name').value.trim();
+  const contact = document.getElementById('nom-contact').value.trim();
+  const statement = document.getElementById('statement').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
+    .some(el => el.type !== 'file' && el.value.trim());
+
+  if (step === 0 && !name) return showError('Please enter your name before continuing.'), false;
+  if (step === 0 && (!contact || !emailRegex.test(contact))) return showError('Please enter a valid email address before continuing.'), false;
+  if (step === 1 && !hasNomination) return showError('Please answer at least one award nomination question before continuing.'), false;
+  if (step === 2 && !statement) return showError('Please answer the supporting statement question before continuing.'), false;
+  return true;
+}
+
+function updateCountdown() {
+  const target = new Date('2026-06-01T23:59:59-04:00').getTime();
+  const remaining = Math.max(0, target - Date.now());
+  const days = Math.floor(remaining / 86400000);
+  const hours = Math.floor((remaining % 86400000) / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+  const values = { days, hours, minutes, seconds };
+  Object.entries(values).forEach(([unit, value]) => {
+    const el = document.querySelector(`[data-unit="${unit}"]`);
+    if (el) el.textContent = String(value).padStart(unit === 'days' ? 1 : 2, '0');
+  });
+}
+
+function renderUploadPreviews() {
+  document.querySelectorAll('input[type="file"]').forEach(input => {
+    let preview = input.parentElement.querySelector('.upload-preview');
+    if (!preview) {
+      preview = document.createElement('div');
+      preview.className = 'upload-preview';
+      input.insertAdjacentElement('afterend', preview);
+    }
+    const file = input.files[0];
+    if (!file) {
+      preview.style.display = 'none';
+      preview.innerHTML = '';
+      return;
+    }
+    const sizeMb = (file.size / 1024 / 1024).toFixed(1);
+    const url = URL.createObjectURL(file);
+    preview.style.display = 'block';
+    preview.innerHTML = `<strong>${file.name}</strong><br>${sizeMb} MB selected<video controls src="${url}"></video>`;
+  });
+}
+
+function renderNominees() {
+  const container = document.getElementById('nomineeDirectory');
+  const search = document.getElementById('nomineeSearch').value.trim().toLowerCase();
+  const category = document.getElementById('categoryFilter').value;
+  const maxVotes = Math.max(1, ...approvedNominees.map(n => Number(n.vote_count || 0)));
+  const voted = JSON.parse(localStorage.getItem('banjeesVotes') || '[]');
+  const filtered = approvedNominees.filter(n => {
+    const haystack = `${n.nominee_display || ''} ${n.category || ''}`.toLowerCase();
+    return (!category || n.category === category) && (!search || haystack.includes(search));
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = '<p class="empty-state">No approved nominees match this view yet.</p>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(n => {
+    const votes = Number(n.vote_count || 0);
+    const width = Math.max(4, Math.round((votes / maxVotes) * 100));
+    const disabled = voted.includes(n.id) ? 'disabled' : '';
+    const label = voted.includes(n.id) ? 'Voted' : 'Vote';
+    return `<article class="nominee-card">
+      <div class="nominee-top">
+        <div>
+          <div class="nominee-name">${escapeHtml(n.nominee_display || 'Nominee')}</div>
+          <div class="nominee-category">${escapeHtml(n.category || 'Category')}</div>
+        </div>
+        <button type="button" class="vote-btn" data-vote-id="${n.id}" ${disabled}>${label}</button>
+      </div>
+      <div class="progress-track"><div class="progress-fill" data-progress-width="${width}"></div></div>
+      <div class="vote-count">${votes} vote${votes === 1 ? '' : 's'}</div>
+    </article>`;
+  }).join('');
+
+  container.querySelectorAll('[data-progress-width]').forEach(bar => {
+    bar.style.width = `${bar.dataset.progressWidth}%`;
+  });
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[char]));
+}
+
+async function loadNominees() {
+  try {
+    const res = await fetch('/api/nomination');
+    const data = await res.json();
+    approvedNominees = data.nominations || [];
+    const categories = [...new Set(approvedNominees.map(n => n.category).filter(Boolean))].sort();
+    document.getElementById('categoryFilter').innerHTML = '<option value="">All Categories</option>' +
+      categories.map(cat => `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`).join('');
+    renderNominees();
+  } catch (_) {
+    document.getElementById('nomineeDirectory').innerHTML = '<p class="empty-state">Approved nominees could not be loaded right now.</p>';
+  }
+}
+
+async function voteForNominee(id, button) {
+  button.disabled = true;
+  button.textContent = 'Saving';
+  const res = await fetch('/api/vote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  });
+  if (!res.ok) {
+    button.textContent = 'Try Again';
+    button.disabled = false;
+    return;
+  }
+  const data = await res.json();
+  const voted = JSON.parse(localStorage.getItem('banjeesVotes') || '[]');
+  localStorage.setItem('banjeesVotes', JSON.stringify([...new Set([...voted, id])]));
+  approvedNominees = approvedNominees.map(n => n.id === id ? { ...n, vote_count: data.nomination.vote_count } : n);
+  renderNominees();
+}
+
+async function loadAdminQueue() {
+  const token = document.getElementById('adminToken').value;
+  const status = document.getElementById('adminStatus');
+  const list = document.getElementById('reviewList');
+  status.textContent = 'Loading nominations for review...';
+  list.innerHTML = '';
+
+  const res = await fetch('/api/nomination?admin=1', { headers: { 'x-admin-token': token } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    status.textContent = data.error || 'Review queue could not be loaded.';
+    return;
+  }
+
+  status.textContent = `${data.nominations.length} submissions loaded.`;
+  list.innerHTML = data.nominations.map(n => `<article class="review-card">
+    <div class="nominee-name">${escapeHtml(n.nominee_display || 'Nominee pending review')}</div>
+    <div class="review-meta">${escapeHtml(n.category || 'Uncategorized')} · ${escapeHtml(n.status || 'pending')} · ${new Date(n.created_at).toLocaleDateString()}</div>
+    <div class="review-meta">Submitted by ${escapeHtml(n.nominator_name || '')} (${escapeHtml(n.nominator_contact || '')})</div>
+    <div class="review-actions">
+      <button type="button" class="btn-secondary" data-review-id="${n.id}" data-review-status="approved">Approve</button>
+      <button type="button" class="btn-secondary" data-review-id="${n.id}" data-review-status="rejected">Reject</button>
+    </div>
+  </article>`).join('');
+}
+
+async function updateReviewStatus(id, nextStatus) {
+  const token = document.getElementById('adminToken').value;
+  const status = document.getElementById('adminStatus');
+  const res = await fetch('/api/nomination', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+    body: JSON.stringify({ id, status: nextStatus })
+  });
+  const data = await res.json().catch(() => ({}));
+  status.textContent = res.ok ? `Nomination marked ${nextStatus}.` : (data.error || 'Review status could not be updated.');
+  if (res.ok) {
+    await loadAdminQueue();
+    await loadNominees();
+  }
+}
+
+document.querySelectorAll('[data-next-step]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (validateStep(currentStep)) showStep(currentStep + 1);
+  });
+});
+document.querySelectorAll('[data-prev-step]').forEach(btn => btn.addEventListener('click', () => showStep(currentStep - 1)));
+document.querySelectorAll('[data-step-jump]').forEach(btn => btn.addEventListener('click', () => {
+  const requested = Number(btn.dataset.stepJump);
+  if (requested <= currentStep || validateStep(currentStep)) showStep(requested);
+}));
+document.querySelectorAll('input[type="file"]').forEach(input => input.addEventListener('change', renderUploadPreviews));
+document.getElementById('nomineeSearch').addEventListener('input', renderNominees);
+document.getElementById('categoryFilter').addEventListener('change', renderNominees);
+document.getElementById('nomineeDirectory').addEventListener('click', e => {
+  const button = e.target.closest('[data-vote-id]');
+  if (button) voteForNominee(button.dataset.voteId, button);
+});
+document.getElementById('loadAdmin').addEventListener('click', loadAdminQueue);
+document.getElementById('reviewList').addEventListener('click', e => {
+  const button = e.target.closest('[data-review-id]');
+  if (button) updateReviewStatus(button.dataset.reviewId, button.dataset.reviewStatus);
+});
 
 document.getElementById('nominationForm').addEventListener('submit', function(e) {
   e.preventDefault();
   submitForm();
 });
+showStep(0);
+updateCountdown();
+setInterval(updateCountdown, 1000);
+loadNominees();
 </script>
 </body>
 </html>
