@@ -101,40 +101,30 @@ export default async (request) => {
     }
 
     const id = crypto.randomUUID();
-    let saved;
-
-    if (process.env.INTEGRATION_TEST === 'true') {
-      console.log('INTEGRATION TEST MODE: Bypassing database INSERT query to prevent read-only permission issues.');
-      saved = { id };
-    } else {
-      const db = getDatabase({
-        connectionString: process.env.NETLIFY_AGENT_RUNNER_DB_CONNECTION_STRING || process.env.NETLIFY_DB_URL
-      });
-      const [result] = await db.sql`
-        INSERT INTO nominations (
-          id,
-          nominator_name,
-          nominator_contact,
-          answers,
-          video_key,
-          video_filename,
-          video_content_type,
-          video_size_bytes
-        )
-        VALUES (
-          ${id},
-          ${nominatorName},
-          ${nominatorContact},
-          ${JSON.stringify(answers)}::jsonb,
-          ${videoInfo.key},
-          ${videoInfo.filename},
-          ${videoInfo.contentType},
-          ${videoInfo.size}
-        )
-        RETURNING id
-      `;
-      saved = result;
-    }
+    const db = getDatabase();
+    const [saved] = await db.sql`
+      INSERT INTO nominations (
+        id,
+        nominator_name,
+        nominator_contact,
+        answers,
+        video_key,
+        video_filename,
+        video_content_type,
+        video_size_bytes
+      )
+      VALUES (
+        ${id},
+        ${nominatorName},
+        ${nominatorContact},
+        ${JSON.stringify(answers)}::jsonb,
+        ${videoInfo.key},
+        ${videoInfo.filename},
+        ${videoInfo.contentType},
+        ${videoInfo.size}
+      )
+      RETURNING id
+    `;
 
     return json({ ok: true, id: saved.id }, { status: 201 });
   } catch (err) {
