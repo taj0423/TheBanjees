@@ -65,6 +65,7 @@ form{display:flex;flex-direction:column;gap:36px}
 .section-tag{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:4px;color:var(--red-bright);text-transform:uppercase;margin-bottom:2px}
 .section-title{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);letter-spacing:.5px}
 .section-sub{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:16px;line-height:1.6}
+.section-sub.flush{margin-bottom:0}
 
 /* CARDS */
 .card{background:var(--card);border:1px solid rgba(201,168,76,.12);padding:22px 22px 18px;position:relative}
@@ -82,6 +83,12 @@ input[type=text],select,textarea{background:rgba(255,255,255,.03);border:1px sol
 input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
 input::placeholder,textarea::placeholder{color:rgba(138,128,112,.4);font-style:italic}
 textarea{resize:vertical;min-height:90px;line-height:1.7}
+input[type=file]{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--muted);font-family:'Libre Baskerville',serif;font-size:.86rem;padding:10px 12px;outline:none;width:100%;border-radius:1px}
+input[type=file]::file-selector-button{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--deep);background:var(--gold);border:0;padding:8px 12px;margin-right:12px;cursor:pointer}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
+input::placeholder,textarea::placeholder{color:rgba(138,128,112,.4);font-style:italic}
+textarea{resize:vertical;min-height:90px;line-height:1.7}
+.field-help{font-size:.76rem;color:var(--muted);font-style:italic;line-height:1.7}
 .char-counter{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:1px;color:rgba(154,144,128,.5);text-align:right;margin-top:4px;transition:color .2s}
 .char-counter.warn{color:var(--gold)}
 .char-counter.over{color:var(--red-bright)}
@@ -93,6 +100,7 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 .group-banner.perf   {background:linear-gradient(135deg,rgba(0,144,176,.18),rgba(0,60,100,.1));border:1px solid rgba(0,144,176,.28)}
 .group-banner.person {background:linear-gradient(135deg,rgba(90,138,42,.18),rgba(30,60,0,.1));border:1px solid rgba(90,138,42,.28)}
 .group-banner.impact {background:linear-gradient(135deg,rgba(204,16,16,.18),rgba(100,0,0,.1));border:1px solid rgba(204,16,16,.28)}
+.group-banner.spaced{margin-top:10px}
 .group-emoji{font-size:18px;flex-shrink:0}
 .group-name{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase}
 .group-banner.peoples .group-name{color:var(--gold-light)}
@@ -106,9 +114,15 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 .award-block{background:var(--card2);border:1px solid rgba(201,168,76,.1);border-top:none;padding:20px 20px 22px;margin-bottom:10px;position:relative}
 .award-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.2),transparent)}
 .award-block:last-of-type{margin-bottom:0}
+.award-block.locked{opacity:.6}
+.award-block.locked .award-name{margin-bottom:4px}
+.award-block.locked p{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .award-num{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
 .award-name{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:var(--gold-light);margin-bottom:3px}
+.award-name.compact{margin-bottom:4px}
 .award-tagline{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.8rem;color:var(--gold);margin-bottom:14px}
+.award-block.locked{opacity:.6}
+.locked-description{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .criteria-title{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:7px}
 .criteria-list{list-style:none;display:flex;flex-direction:column;gap:4px}
 .criteria-list li{font-size:.81rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.55}
@@ -128,10 +142,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 /* IMPACT LOCKED */
 .academy-badge{display:flex;align-items:center;gap:8px;background:rgba(204,16,16,.1);border:1px solid rgba(204,16,16,.25);padding:9px 13px;margin-bottom:10px}
 .academy-badge span{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:#FF8080}
-.group-banner-gap{margin-top:10px}
-.award-block-locked{opacity:.6}
-.award-name-compact{margin-bottom:4px}
-.academy-desc{font-size:.81rem;color:var(--muted);line-height:1.7;margin-top:8px}
 
 /* CHECKBOXES */
 .check-group{display:flex;flex-direction:column;gap:10px}
@@ -163,6 +173,205 @@ textarea{resize:vertical;min-height:90px;line-height:1.7}
 #successMsg p{color:var(--muted);font-style:italic;line-height:1.9;font-size:.9rem}
 #successMsg strong{color:var(--gold-light);font-style:normal}
 
+/* INTERACTIVE APP LAYERS */
+.app-panel{background:rgba(28,30,38,.82);border:1px solid rgba(201,168,76,.14);padding:18px;margin-bottom:24px;position:relative}
+.app-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim),transparent)}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.count-box{border:1px solid rgba(201,168,76,.16);background:rgba(255,255,255,.025);padding:12px 8px;text-align:center}
+.count-num{display:block;font-family:'Cinzel Decorative',serif;font-size:1.35rem;color:var(--gold-light);line-height:1}
+.count-label{display:block;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 24px}
+.step-pill{border:1px solid rgba(201,168,76,.16);background:rgba(255,255,255,.025);color:var(--muted);font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;cursor:pointer}
+.step-pill.active{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,.08)}
+.step-pill.complete{border-color:rgba(90,138,42,.44);color:#A0D060}
+.form-step{display:none}
+.form-step.active{display:block;animation:fadeUp .36s ease both}
+.step-actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.btn-secondary{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.22);padding:12px 20px;cursor:pointer}
+.btn-secondary:disabled{opacity:.45;cursor:not-allowed}
+.upload-preview{display:none;margin-top:9px;border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.025);padding:10px;color:var(--muted);font-size:.78rem;line-height:1.6}
+.upload-preview video{display:block;width:100%;max-height:180px;margin-top:8px;background:#0A0B0E}
+.directory-controls{display:grid;grid-template-columns:1fr 180px;gap:10px;margin-top:16px}
+.nominee-grid{display:grid;gap:12px;margin-top:16px}
+.nominee-card{border:1px solid rgba(201,168,76,.14);background:rgba(22,24,32,.88);padding:16px}
+.nominee-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.nominee-name{font-family:'Cinzel',serif;color:var(--gold-light);font-size:.9rem;font-weight:700}
+.nominee-category{font-family:'Cinzel',serif;color:var(--muted);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;margin-top:5px}
+.vote-btn{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--deep);background:var(--gold);border:0;padding:9px 13px;cursor:pointer;white-space:nowrap}
+.vote-btn:disabled{opacity:.55;cursor:not-allowed}
+.progress-track{height:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.12);margin-top:12px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));transition:width .35s}
+.vote-count{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:8px}
+.empty-state,.inline-status{color:var(--muted);font-size:.82rem;font-style:italic;line-height:1.7;margin-top:12px}
+.admin-tools{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px}
+.review-list{display:grid;gap:10px;margin-top:14px}
+.review-card{border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.025);padding:14px}
+.review-meta{font-size:.76rem;color:var(--muted);line-height:1.7;margin-top:6px}
+.review-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+@media(max-width:620px){.countdown-grid,.stepper{grid-template-columns:repeat(2,1fr)}.directory-controls,.admin-tools{grid-template-columns:1fr}.step-actions{flex-direction:column}.btn-secondary,.btn-submit{width:100%}}
+
+/* MODAL POPUP */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 11, 14, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  background: var(--card);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(201, 168, 76, 0.05);
+  animation: modalReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  padding: 40px 28px 30px;
+  text-align: center;
+}
+@keyframes modalReveal {
+  from {
+    transform: scale(0.95) translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+.modal-gild-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold-light), var(--gold), transparent);
+}
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+.modal-close:hover {
+  color: var(--gold-light);
+  transform: scale(1.1);
+}
+.success-icon {
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.3));
+  animation: starPulse 2.5s infinite alternate ease-in-out;
+}
+@keyframes starPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(201,168,76,0.2)); }
+  100% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(201,168,76,0.55)); }
+}
+.modal-body h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--gold-pale), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+.modal-divider {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-dim);
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 18px;
+}
+.modal-text {
+  color: var(--text);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.modal-dates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.date-card {
+  background: rgba(201, 168, 76, 0.03);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 14px 10px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.date-card:hover {
+  border-color: rgba(201, 168, 76, 0.35);
+}
+.date-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 4px;
+}
+.date-value {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+.modal-footer-text {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-bottom: 24px;
+}
+.modal-action-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--deep);
+  background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold-light) 35%, var(--gold) 65%, #8A6010 100%);
+  border: none;
+  padding: 12px 36px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.modal-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(201, 168, 76, 0.25);
+}
+.btn-nominate-again {
+  margin-top: 32px !important;
+  font-size: 0.74rem !important;
+  padding: 12px 28px !important;
+}
+
 /* FOOTER */
 footer{text-align:center;padding:36px 0 0;position:relative;z-index:1}
 .footer-line{width:60px;height:3px;background:var(--red-bright);margin:0 auto 12px}
@@ -192,17 +401,35 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 </header>
 
 <div class="elig-banner">
-  <p><strong>Nomination Period:</strong> May 8 – June 1, 2026 &nbsp;·&nbsp; <strong>Eligibility Window:</strong> May 4, 2025 – May 4, 2026<br>
+  <p><strong>Nomination Period:</strong> May 8 – June 1, 2026 &nbsp;·&nbsp; <strong>Eligibility Window:</strong> January 1, 2025 – May 30, 2026<br>
   All nominees must have <strong>actively participated in WNY Ballroom</strong> during the eligibility period. Top 5 per category announced by <strong>The People's Choice Academy</strong> on <strong>June 8, 2026</strong>. Public voting opens <strong>June 10</strong>.</p>
 </div>
 <div class="integrity-note">
   <p><strong>A note on integrity:</strong> This process was built to celebrate participation, impact, and the people pushing WNY Ballroom forward — not to create drama or division. The People's Choice Academy reserves the right to verify, adjust, or remove any submission. Submit in good faith.</p>
 </div>
 
+<section class="app-panel" aria-label="Countdown to nominations closing">
+  <div class="section-title">Nomination Countdown</div>
+  <p class="section-sub flush">Live timer to the June 1, 2026 nomination deadline.</p>
+  <div class="countdown-grid" id="countdown">
+    <div class="count-box"><span class="count-num" data-unit="days">0</span><span class="count-label">Days</span></div>
+    <div class="count-box"><span class="count-num" data-unit="hours">0</span><span class="count-label">Hours</span></div>
+    <div class="count-box"><span class="count-num" data-unit="minutes">0</span><span class="count-label">Minutes</span></div>
+    <div class="count-box"><span class="count-num" data-unit="seconds">0</span><span class="count-label">Seconds</span></div>
+  </div>
+</section>
+
+<nav class="stepper" aria-label="Nomination form steps">
+  <button type="button" class="step-pill active" data-step-jump="0">01 Info</button>
+  <button type="button" class="step-pill" data-step-jump="1">02 Category</button>
+  <button type="button" class="step-pill" data-step-jump="2">03 Statement</button>
+  <button type="button" class="step-pill" data-step-jump="3">04 Confirm</button>
+</nav>
+
 <form id="nominationForm">
 
   <!-- 01: YOUR INFO -->
-  <div>
+  <div class="form-step active" data-step="0">
     <div class="section-hd">
       <div class="section-num">01</div>
       <div><div class="section-tag">Nominator</div><div class="section-title">Your Information</div></div>
@@ -217,6 +444,8 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <div class="field">
           <label class="field-label" for="nom-contact">Email or Phone</label>
           <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
+          <label class="field-label" for="nom-contact">Email Address</label>
+          <input type="email" id="nom-contact" name="Nominator Contact" placeholder="your.name@example.com" maxlength="100" required>
         </div>
       </div>
       <div class="field">
@@ -228,6 +457,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
   <!-- 02: AWARD CATEGORIES -->
   <div>
+    <div class="step-actions">
+      <span></span>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
+    </div>
+  </div>
+
+  <!-- 02: AWARD CATEGORIES -->
+  <div class="form-step" data-step="1">
     <div class="section-hd">
       <div class="section-num">02</div>
       <div><div class="section-tag">Nomination</div><div class="section-title">Award Categories</div></div>
@@ -266,6 +503,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
     <!-- ═══ EVENT-BASED ═══ -->
     <div class="group-banner event group-banner-gap">
+    <div class="group-banner event spaced">
       <span class="group-emoji">🎪</span>
       <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
     </div>
@@ -346,6 +584,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
     <!-- ═══ PERFORMANCE-BASED ═══ -->
     <div class="group-banner perf group-banner-gap">
+    <div class="group-banner perf spaced">
       <span class="group-emoji">🎬</span>
       <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
     </div>
@@ -369,6 +608,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Battle of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Battle of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -389,6 +632,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip Link <span class="opt">optional but recommended</span></span>
         <input type="text" class="nominee-field" name="Effect of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Effect of the Year — Clip Upload" accept="video/*">
+      </div>
     </div>
 
     <div class="award-block">
@@ -408,6 +655,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="sub-field">
         <span class="sub-label">Clip Link <span class="opt">strongly recommended</span></span>
         <input type="text" class="nominee-field" name="Clip of the Year — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
+      </div>
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Clip of the Year — Clip Upload" accept="video/*">
       </div>
     </div>
 
@@ -434,6 +685,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
     <!-- ═══ PERSON-BASED ═══ -->
     <div class="group-banner person group-banner-gap">
+      <div class="sub-field">
+        <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
+        <input type="file" name="Most Memeable Moment — Clip Upload" accept="video/*">
+      </div>
+    </div>
+
+    <!-- ═══ PERSON-BASED ═══ -->
+    <div class="group-banner person spaced">
       <span class="group-emoji">🌟</span>
       <div><div class="group-name">Person-Based Awards</div><div class="group-desc">Individuals who showed up, judged fairly, and led with integrity</div></div>
     </div>
@@ -544,6 +803,57 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
   <!-- 03: SUPPORTING STATEMENT -->
   <div>
+    <div class="group-banner impact spaced">
+      <span class="group-emoji">🌍</span>
+      <div><div class="group-name">Impact Awards</div><div class="group-desc">Honoring long-term contributions and community care — open to all nominations</div></div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 14 · Impact-Based</div>
+      <div class="award-name">Ballroom Impact Award</div>
+      <div class="award-tagline">"For the one who shifted the scene — period."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Long-term impact, influence, and contribution to WNY Ballroom culture</li>
+        <li>Consistency, dedication, and leadership over the years</li>
+        <li>A lasting legacy that has fundamentally shaped the scene</li>
+      </ul>
+      <div class="award-divider"></div>
+      <label class="nominate-label" for="ballroom-impact-nominee">Nominate for Ballroom Impact Award</label>
+      <input type="text" class="nominee-field" id="ballroom-impact-nominee" name="Ballroom Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <label class="sub-label" for="ballroom-impact-house">House Affiliation <span class="opt">optional</span></label>
+        <input type="text" class="nominee-field" id="ballroom-impact-house" name="Ballroom Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+    </div>
+
+    <div class="award-block">
+      <div class="award-num">Award 15 · Impact-Based</div>
+      <div class="award-name">Community Impact Award</div>
+      <div class="award-tagline">"For the one doing real work for the people."</div>
+      <div class="criteria-title">What We're Looking For</div>
+      <ul class="criteria-list">
+        <li>Community care, advocacy, and work both inside and outside the ballroom floor</li>
+        <li>Active support, empowerment, and care for others in the community</li>
+        <li>Uplifting the community and navigating conflict with positive contribution</li>
+      </ul>
+      <div class="award-divider"></div>
+      <label class="nominate-label" for="community-impact-nominee">Nominate for Community Impact Award</label>
+      <input type="text" class="nominee-field" id="community-impact-nominee" name="Community Impact Award — Nominee Name" placeholder="Nominee's ballroom name" maxlength="100">
+      <div class="sub-field">
+        <label class="sub-label" for="community-impact-house">House Affiliation <span class="opt">optional</span></label>
+        <input type="text" class="nominee-field" id="community-impact-house" name="Community Impact Award — House Affiliation" placeholder="House name or independent" maxlength="100">
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
+    </div>
+  </div>
+
+  <!-- 03: SUPPORTING STATEMENT -->
+  <div class="form-step" data-step="2">
     <div class="section-hd">
       <div class="section-num">03</div>
       <div><div class="section-tag">Statement</div><div class="section-title">Supporting Statement</div></div>
@@ -555,11 +865,24 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')"></textarea>
         <div class="char-counter" id="statCount">0 / 500</div>
       </div>
+        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')" required></textarea>
+        <div class="char-counter" id="statCount">0 / 500</div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="video-evidence">Video Evidence <span class="opt">optional</span></label>
+        <input type="file" id="video-evidence" name="Video Evidence" accept="video/*">
+        <p class="field-help">Upload one video clip if it helps verify the nomination. Links can still be added in the category fields above.</p>
+      </div>
+    </div>
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <button type="button" class="btn-secondary" data-next-step>Continue</button>
     </div>
   </div>
 
   <!-- 04: CONFIRMATIONS -->
   <div>
+  <div class="form-step" data-step="3">
     <div class="section-hd">
       <div class="section-num">04</div>
       <div><div class="section-tag">Acknowledgment</div><div class="section-title">Eligibility &amp; Integrity</div></div>
@@ -569,6 +892,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <label class="check-item">
           <input type="checkbox" id="chk1">
           <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between May 4, 2025 and May 4, 2026.</span>
+          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between January 1, 2025 and May 30, 2026.</span>
         </label>
         <label class="check-item">
           <input type="checkbox" id="chk2">
@@ -588,6 +912,14 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
   <!-- SUBMIT -->
   <div class="submit-wrap">
+    <div class="step-actions">
+      <button type="button" class="btn-secondary" data-prev-step>Back</button>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-wrap form-step" data-step="3">
     <button type="submit" id="submitBtn" class="btn-submit">Submit Nomination</button>
     <p class="submit-note">
       Nominations close <strong>June 1, 2026</strong> &nbsp;·&nbsp; Top 5 announced <strong>June 8, 2026</strong><br>
@@ -597,6 +929,31 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   </div>
 
 </form>
+
+<section class="app-panel" aria-label="Approved nominee voting">
+  <div class="section-title">Nominee Directory &amp; Voting</div>
+  <p class="section-sub flush">Approved nominees appear here after review. Search by nominee or category, then vote once per browser.</p>
+  <div class="directory-controls">
+    <input type="text" id="nomineeSearch" placeholder="Search nominees or categories">
+    <select id="categoryFilter" aria-label="Filter nominees by category">
+      <option value="">All Categories</option>
+    </select>
+  </div>
+  <div id="nomineeDirectory" class="nominee-grid">
+    <p class="empty-state">Loading approved nominees...</p>
+  </div>
+</section>
+
+<section class="app-panel" aria-label="Admin review dashboard">
+  <div class="section-title">Admin Review Dashboard</div>
+  <p class="section-sub flush">Enter the review token configured in Netlify to approve or reject nominations.</p>
+  <div class="admin-tools">
+    <input type="password" id="adminToken" placeholder="Review token" autocomplete="off">
+    <button type="button" class="btn-secondary" id="loadAdmin">Load Review Queue</button>
+  </div>
+  <div id="adminStatus" class="inline-status"></div>
+  <div id="reviewList" class="review-list"></div>
+</section>
 
 <!-- SUCCESS -->
 <div id="successMsg">
@@ -608,6 +965,54 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     Public voting opens <strong>June 10</strong> and runs through <strong>July 10, 2026</strong>.<br><br>
     Winners announced live — <em>Saturday, July 25 · The CAZ · 2221 Seneca St.</em>
   </p>
+  <button type="button" class="btn-submit btn-nominate-again" onclick="resetFormForNewSubmission()">Nominate in another category</button>
+</div>
+
+<!-- SUCCESS MODAL POPUP -->
+<div id="successModal" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+    <div class="modal-gild-border"></div>
+    <div class="modal-body">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M12 2L14.4 7.1L20 7.9L16 11.8L16.9 17.4L12 14.8L7.1 17.4L8 11.8L4 7.9L9.6 7.1L12 2Z" fill="url(#goldGradient)" stroke="url(#goldGradientDim)" stroke-width="1"/>
+          <path d="M6 9H4.5C3.12 9 2 10.12 2 11.5V12C2 13.1 2.9 14 4 14H6V9ZM18 9H19.5C20.88 9 22 10.12 22 11.5V12C22 13.1 21.1 14 20 14H18V9ZM12 15V18M9 21H15M8 6V4H16V6" stroke="url(#goldGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--gold-pale)" />
+              <stop offset="50%" stop-color="var(--gold-light)" />
+              <stop offset="100%" stop-color="var(--gold)" />
+            </linearGradient>
+            <linearGradient id="goldGradientDim" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--gold)" />
+              <stop offset="100%" stop-color="var(--gold-dim)" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2>Nomination Received!</h2>
+      <div class="modal-divider">✦ ✦ ✦</div>
+      <p class="modal-text">
+        Your nomination is in. <strong>The People's Choice Academy</strong> will review all submissions
+        and announce the Top 5 in each category on <strong>June 8, 2026</strong>.
+      </p>
+      <div class="modal-dates-grid">
+        <div class="date-card">
+          <span class="date-label">Public Voting</span>
+          <span class="date-value">June 10 – July 10</span>
+        </div>
+        <div class="date-card">
+          <span class="date-label">Winners Live</span>
+          <span class="date-value">Saturday, July 25</span>
+        </div>
+      </div>
+      <p class="modal-footer-text">
+        Winners announced live at <em>The CAZ · 2221 Seneca St.</em>
+      </p>
+      <button type="button" class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -650,6 +1055,30 @@ async function submitForm() {
 
   if (!name || !contact) {
     showError('Please enter your name and contact info before submitting.');
+async function submitForm() {
+  const name    = document.getElementById('nom-name').value.trim();
+  const contact = document.getElementById('nom-contact').value.trim();
+  const statement = document.getElementById('statement').value.trim();
+  const video = document.getElementById('video-evidence').files[0];
+  const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
+  const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
+    .some(el => el.type !== 'file' && el.value.trim());
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!name) {
+    showError('Please enter your name before submitting.');
+    return;
+  }
+  if (!contact || !emailRegex.test(contact)) {
+    showError('Please enter a valid email address.');
+    return;
+  }
+  if (!hasNomination) {
+    showError('Please answer at least one award nomination question before submitting.');
+    return;
+  }
+  if (!statement) {
+    showError('Please answer the supporting statement question before submitting.');
     return;
   }
   if (chks.includes(false)) {
@@ -663,6 +1092,27 @@ async function submitForm() {
   document.querySelectorAll('[name]').forEach(el => {
     const val = el.value.trim();
     if (val) fd.append(el.name, val);
+  const fileInputs = document.querySelectorAll('input[type="file"]');
+  for (const input of fileInputs) {
+    const file = input.files[0];
+    if (file && !file.type.startsWith('video/')) {
+      if (input.id === 'video-evidence') {
+        showError('Please upload a valid video file.');
+      } else {
+        showError(`Please upload a valid video file for ${input.name.replace(' — Clip Upload', '')}.`);
+      }
+      return;
+    }
+  }
+  hideError();
+
+  const fd = new FormData();
+  document.querySelectorAll('[name]').forEach(el => {
+    if (el.type === 'file') {
+      if (el.files[0]) fd.append(el.name, el.files[0]);
+      return;
+    }
+    fd.append(el.name, el.value.trim());
   });
   fd.append('All Acknowledgments Confirmed', 'Yes');
 
@@ -676,6 +1126,9 @@ async function submitForm() {
       method: 'POST',
       body: fd,
       headers: { 'Accept': 'application/json' }
+    const res = await fetch('/api/nomination', {
+      method: 'POST',
+      body: fd
     });
 
     if (res.ok) {
@@ -684,11 +1137,13 @@ async function submitForm() {
       s.style.display = 'block';
       s.style.animation = 'fadeUp .6s ease both';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      openModal();
     } else {
       let msg = 'Submission failed. Please try again.';
       try {
         const data = await res.json();
         if (data?.errors?.length) msg = data.errors.map(e => e.message).join(', ');
+        if (data?.error) msg = data.error;
       } catch(_) {}
       showError(msg);
       btn.textContent = orig;
@@ -700,6 +1155,271 @@ async function submitForm() {
     btn.disabled = false;
   }
 }
+
+function openModal() {
+  const modal = document.getElementById('successModal');
+  modal.style.display = 'flex';
+  // Force reflow
+  modal.offsetHeight;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('successModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 400);
+}
+
+function resetFormForNewSubmission() {
+  const form = document.getElementById('nominationForm');
+  form.reset();
+  form.style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+  
+  // Clear any existing errors
+  hideError();
+  
+  // Reset character counter
+  const countEl = document.getElementById('statCount');
+  if (countEl) {
+    countEl.textContent = '0 / 500';
+    countEl.className = 'char-counter';
+  }
+  
+  // Restore submit button state
+  const btn = document.getElementById('submitBtn');
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Nomination';
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showStep(0);
+  renderUploadPreviews();
+}
+
+let currentStep = 0;
+let approvedNominees = [];
+
+function showStep(step) {
+  currentStep = Math.max(0, Math.min(3, step));
+  document.querySelectorAll('.form-step').forEach(el => {
+    el.classList.toggle('active', Number(el.dataset.step) === currentStep);
+  });
+  document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+    pill.classList.toggle('active', idx === currentStep);
+    pill.classList.toggle('complete', idx < currentStep);
+  });
+  hideError();
+  document.querySelector('.stepper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function validateStep(step) {
+  const name = document.getElementById('nom-name').value.trim();
+  const contact = document.getElementById('nom-contact').value.trim();
+  const statement = document.getElementById('statement').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
+    .some(el => el.type !== 'file' && el.value.trim());
+
+  if (step === 0 && !name) return showError('Please enter your name before continuing.'), false;
+  if (step === 0 && (!contact || !emailRegex.test(contact))) return showError('Please enter a valid email address before continuing.'), false;
+  if (step === 1 && !hasNomination) return showError('Please answer at least one award nomination question before continuing.'), false;
+  if (step === 2 && !statement) return showError('Please answer the supporting statement question before continuing.'), false;
+  return true;
+}
+
+function updateCountdown() {
+  const target = new Date('2026-06-01T23:59:59-04:00').getTime();
+  const remaining = Math.max(0, target - Date.now());
+  const days = Math.floor(remaining / 86400000);
+  const hours = Math.floor((remaining % 86400000) / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+  const values = { days, hours, minutes, seconds };
+  Object.entries(values).forEach(([unit, value]) => {
+    const el = document.querySelector(`[data-unit="${unit}"]`);
+    if (el) el.textContent = String(value).padStart(unit === 'days' ? 1 : 2, '0');
+  });
+}
+
+function renderUploadPreviews() {
+  document.querySelectorAll('input[type="file"]').forEach(input => {
+    let preview = input.parentElement.querySelector('.upload-preview');
+    if (!preview) {
+      preview = document.createElement('div');
+      preview.className = 'upload-preview';
+      input.insertAdjacentElement('afterend', preview);
+    }
+    const file = input.files[0];
+    if (!file) {
+      preview.style.display = 'none';
+      preview.innerHTML = '';
+      return;
+    }
+    const sizeMb = (file.size / 1024 / 1024).toFixed(1);
+    const url = URL.createObjectURL(file);
+    preview.style.display = 'block';
+    preview.innerHTML = `<strong>${file.name}</strong><br>${sizeMb} MB selected<video controls src="${url}"></video>`;
+  });
+}
+
+function renderNominees() {
+  const container = document.getElementById('nomineeDirectory');
+  const search = document.getElementById('nomineeSearch').value.trim().toLowerCase();
+  const category = document.getElementById('categoryFilter').value;
+  const maxVotes = Math.max(1, ...approvedNominees.map(n => Number(n.vote_count || 0)));
+  const voted = JSON.parse(localStorage.getItem('banjeesVotes') || '[]');
+  const filtered = approvedNominees.filter(n => {
+    const haystack = `${n.nominee_display || ''} ${n.category || ''}`.toLowerCase();
+    return (!category || n.category === category) && (!search || haystack.includes(search));
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = '<p class="empty-state">No approved nominees match this view yet.</p>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(n => {
+    const votes = Number(n.vote_count || 0);
+    const width = Math.max(4, Math.round((votes / maxVotes) * 100));
+    const disabled = voted.includes(n.id) ? 'disabled' : '';
+    const label = voted.includes(n.id) ? 'Voted' : 'Vote';
+    return `<article class="nominee-card">
+      <div class="nominee-top">
+        <div>
+          <div class="nominee-name">${escapeHtml(n.nominee_display || 'Nominee')}</div>
+          <div class="nominee-category">${escapeHtml(n.category || 'Category')}</div>
+        </div>
+        <button type="button" class="vote-btn" data-vote-id="${n.id}" ${disabled}>${label}</button>
+      </div>
+      <div class="progress-track"><div class="progress-fill" data-progress-width="${width}"></div></div>
+      <div class="vote-count">${votes} vote${votes === 1 ? '' : 's'}</div>
+    </article>`;
+  }).join('');
+
+  container.querySelectorAll('[data-progress-width]').forEach(bar => {
+    bar.style.width = `${bar.dataset.progressWidth}%`;
+  });
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[char]));
+}
+
+async function loadNominees() {
+  try {
+    const res = await fetch('/api/nomination');
+    const data = await res.json();
+    approvedNominees = data.nominations || [];
+    const categories = [...new Set(approvedNominees.map(n => n.category).filter(Boolean))].sort();
+    document.getElementById('categoryFilter').innerHTML = '<option value="">All Categories</option>' +
+      categories.map(cat => `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`).join('');
+    renderNominees();
+  } catch (_) {
+    document.getElementById('nomineeDirectory').innerHTML = '<p class="empty-state">Approved nominees could not be loaded right now.</p>';
+  }
+}
+
+async function voteForNominee(id, button) {
+  button.disabled = true;
+  button.textContent = 'Saving';
+  const res = await fetch('/api/vote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  });
+  if (!res.ok) {
+    button.textContent = 'Try Again';
+    button.disabled = false;
+    return;
+  }
+  const data = await res.json();
+  const voted = JSON.parse(localStorage.getItem('banjeesVotes') || '[]');
+  localStorage.setItem('banjeesVotes', JSON.stringify([...new Set([...voted, id])]));
+  approvedNominees = approvedNominees.map(n => n.id === id ? { ...n, vote_count: data.nomination.vote_count } : n);
+  renderNominees();
+}
+
+async function loadAdminQueue() {
+  const token = document.getElementById('adminToken').value;
+  const status = document.getElementById('adminStatus');
+  const list = document.getElementById('reviewList');
+  status.textContent = 'Loading nominations for review...';
+  list.innerHTML = '';
+
+  const res = await fetch('/api/nomination?admin=1', { headers: { 'x-admin-token': token } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    status.textContent = data.error || 'Review queue could not be loaded.';
+    return;
+  }
+
+  status.textContent = `${data.nominations.length} submissions loaded.`;
+  list.innerHTML = data.nominations.map(n => `<article class="review-card">
+    <div class="nominee-name">${escapeHtml(n.nominee_display || 'Nominee pending review')}</div>
+    <div class="review-meta">${escapeHtml(n.category || 'Uncategorized')} · ${escapeHtml(n.status || 'pending')} · ${new Date(n.created_at).toLocaleDateString()}</div>
+    <div class="review-meta">Submitted by ${escapeHtml(n.nominator_name || '')} (${escapeHtml(n.nominator_contact || '')})</div>
+    <div class="review-actions">
+      <button type="button" class="btn-secondary" data-review-id="${n.id}" data-review-status="approved">Approve</button>
+      <button type="button" class="btn-secondary" data-review-id="${n.id}" data-review-status="rejected">Reject</button>
+    </div>
+  </article>`).join('');
+}
+
+async function updateReviewStatus(id, nextStatus) {
+  const token = document.getElementById('adminToken').value;
+  const status = document.getElementById('adminStatus');
+  const res = await fetch('/api/nomination', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+    body: JSON.stringify({ id, status: nextStatus })
+  });
+  const data = await res.json().catch(() => ({}));
+  status.textContent = res.ok ? `Nomination marked ${nextStatus}.` : (data.error || 'Review status could not be updated.');
+  if (res.ok) {
+    await loadAdminQueue();
+    await loadNominees();
+  }
+}
+
+document.querySelectorAll('[data-next-step]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (validateStep(currentStep)) showStep(currentStep + 1);
+  });
+});
+document.querySelectorAll('[data-prev-step]').forEach(btn => btn.addEventListener('click', () => showStep(currentStep - 1)));
+document.querySelectorAll('[data-step-jump]').forEach(btn => btn.addEventListener('click', () => {
+  const requested = Number(btn.dataset.stepJump);
+  if (requested <= currentStep || validateStep(currentStep)) showStep(requested);
+}));
+document.querySelectorAll('input[type="file"]').forEach(input => input.addEventListener('change', renderUploadPreviews));
+document.getElementById('nomineeSearch').addEventListener('input', renderNominees);
+document.getElementById('categoryFilter').addEventListener('change', renderNominees);
+document.getElementById('nomineeDirectory').addEventListener('click', e => {
+  const button = e.target.closest('[data-vote-id]');
+  if (button) voteForNominee(button.dataset.voteId, button);
+});
+document.getElementById('loadAdmin').addEventListener('click', loadAdminQueue);
+document.getElementById('reviewList').addEventListener('click', e => {
+  const button = e.target.closest('[data-review-id]');
+  if (button) updateReviewStatus(button.dataset.reviewId, button.dataset.reviewStatus);
+});
+
+document.getElementById('nominationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  submitForm();
+});
+showStep(0);
+updateCountdown();
+setInterval(updateCountdown, 1000);
+loadNominees();
 </script>
 </body>
 </html>
