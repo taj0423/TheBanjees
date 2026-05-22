@@ -80,6 +80,9 @@ form{display:flex;flex-direction:column;gap:36px}
 .field-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
 .field-label .opt{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.66rem;letter-spacing:0;text-transform:none;color:rgba(154,144,128,.5);margin-left:6px}
 input[type=text],select,textarea{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--text);font-family:'Libre Baskerville',serif;font-size:.92rem;padding:10px 14px;outline:none;width:100%;border-radius:1px;transition:border-color .22s,background .22s,box-shadow .22s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
+input::placeholder,textarea::placeholder{color:rgba(138,128,112,.4);font-style:italic}
+textarea{resize:vertical;min-height:90px;line-height:1.7}
 input[type=file]{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);color:var(--muted);font-family:'Libre Baskerville',serif;font-size:.86rem;padding:10px 12px;outline:none;width:100%;border-radius:1px}
 input[type=file]::file-selector-button{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--deep);background:var(--gold);border:0;padding:8px 12px;margin-right:12px;cursor:pointer}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,.05);box-shadow:0 0 0 3px rgba(201,168,76,.08)}
@@ -439,6 +442,8 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
           <input type="text" id="nom-name" name="Nominator Name" placeholder="Ballroom or legal name" maxlength="100" required>
         </div>
         <div class="field">
+          <label class="field-label" for="nom-contact">Email or Phone</label>
+          <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
           <label class="field-label" for="nom-contact">Email Address</label>
           <input type="email" id="nom-contact" name="Nominator Contact" placeholder="your.name@example.com" maxlength="100" required>
         </div>
@@ -448,6 +453,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <input type="text" id="nom-affil" name="Nominator Affiliation" placeholder="House, Kiki house, or independent" maxlength="100">
       </div>
     </div>
+  </div>
+
+  <!-- 02: AWARD CATEGORIES -->
+  <div>
     <div class="step-actions">
       <span></span>
       <button type="button" class="btn-secondary" data-next-step>Continue</button>
@@ -493,6 +502,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ EVENT-BASED ═══ -->
+    <div class="group-banner event group-banner-gap">
     <div class="group-banner event spaced">
       <span class="group-emoji">🎪</span>
       <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
@@ -573,6 +583,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ PERFORMANCE-BASED ═══ -->
+    <div class="group-banner perf group-banner-gap">
     <div class="group-banner perf spaced">
       <span class="group-emoji">🎬</span>
       <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
@@ -670,6 +681,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <span class="sub-label">Clip or Reference Link <span class="opt">optional</span></span>
         <input type="text" class="nominee-field" name="Most Memeable Moment — Clip Link" placeholder="Instagram, YouTube, or Drive link" maxlength="300">
       </div>
+    </div>
+
+    <!-- ═══ PERSON-BASED ═══ -->
+    <div class="group-banner person group-banner-gap">
       <div class="sub-field">
         <span class="sub-label">Upload Clip <span class="opt">optional</span></span>
         <input type="file" name="Most Memeable Moment — Clip Upload" accept="video/*">
@@ -765,6 +780,29 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ IMPACT AWARDS ═══ -->
+    <div class="group-banner impact group-banner-gap">
+      <span class="group-emoji">🌍</span>
+      <div><div class="group-name">Impact Awards</div><div class="group-desc">Academy-selected — not open for public nomination</div></div>
+    </div>
+
+    <div class="award-block award-block-locked">
+      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+      <div class="award-name award-name-compact">Ballroom Impact Award</div>
+      <div class="award-tagline">"For the one who shifted the scene — period."</div>
+      <p class="academy-desc">Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
+    </div>
+
+    <div class="award-block award-block-locked">
+      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
+      <div class="award-name award-name-compact">Community Impact Award</div>
+      <div class="award-tagline">"For the one doing real work for the people."</div>
+      <p class="academy-desc">Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
+    </div>
+
+  </div>
+
+  <!-- 03: SUPPORTING STATEMENT -->
+  <div>
     <div class="group-banner impact spaced">
       <span class="group-emoji">🌍</span>
       <div><div class="group-name">Impact Awards</div><div class="group-desc">Honoring long-term contributions and community care — open to all nominations</div></div>
@@ -824,6 +862,9 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     <div class="card">
       <div class="field">
         <label class="field-label" for="statement">Why does this nominee deserve this award?</label>
+        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')"></textarea>
+        <div class="char-counter" id="statCount">0 / 500</div>
+      </div>
         <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')" required></textarea>
         <div class="char-counter" id="statCount">0 / 500</div>
       </div>
@@ -840,6 +881,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   </div>
 
   <!-- 04: CONFIRMATIONS -->
+  <div>
   <div class="form-step" data-step="3">
     <div class="section-hd">
       <div class="section-num">04</div>
@@ -849,6 +891,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="check-group">
         <label class="check-item">
           <input type="checkbox" id="chk1">
+          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between May 4, 2025 and May 4, 2026.</span>
           <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between January 1, 2025 and May 30, 2026.</span>
         </label>
         <label class="check-item">
@@ -865,6 +908,10 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         </label>
       </div>
     </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-wrap">
     <div class="step-actions">
       <button type="button" class="btn-secondary" data-prev-step>Back</button>
       <span></span>
@@ -996,6 +1043,18 @@ function hideError() {
   document.getElementById('submitError').style.display = 'none';
 }
 
+document.getElementById('nominationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  submitForm();
+});
+
+async function submitForm() {
+  const name    = document.getElementById('nom-name').value.trim();
+  const contact = document.getElementById('nom-contact').value.trim();
+  const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
+
+  if (!name || !contact) {
+    showError('Please enter your name and contact info before submitting.');
 async function submitForm() {
   const name    = document.getElementById('nom-name').value.trim();
   const contact = document.getElementById('nom-contact').value.trim();
@@ -1026,6 +1085,13 @@ async function submitForm() {
     showError('Please check all four acknowledgment boxes before submitting.');
     return;
   }
+  hideError();
+
+  // Build FormData from all named fields
+  const fd = new FormData();
+  document.querySelectorAll('[name]').forEach(el => {
+    const val = el.value.trim();
+    if (val) fd.append(el.name, val);
   const fileInputs = document.querySelectorAll('input[type="file"]');
   for (const input of fileInputs) {
     const file = input.files[0];
@@ -1056,6 +1122,10 @@ async function submitForm() {
   btn.disabled = true;
 
   try {
+    const res = await fetch('https://formspree.io/f/xojbvvnz', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
     const res = await fetch('/api/nomination', {
       method: 'POST',
       body: fd
@@ -1072,6 +1142,7 @@ async function submitForm() {
       let msg = 'Submission failed. Please try again.';
       try {
         const data = await res.json();
+        if (data?.errors?.length) msg = data.errors.map(e => e.message).join(', ');
         if (data?.error) msg = data.error;
       } catch(_) {}
       showError(msg);
