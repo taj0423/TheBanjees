@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
   "dependencies": {
     "@formspree/cli": "file:./mocks/formspree-cli",
     "@netlify/blobs": "^10.7.8",
