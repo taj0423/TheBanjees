@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@formspree/cli": "file:./mocks/formspree-cli",
     "@netlify/blobs": "^10.7.8",
     "@netlify/database": "^1.0.0",
     "ws": "8.18.0"

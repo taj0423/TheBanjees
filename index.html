@@ -772,29 +772,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ IMPACT AWARDS ═══ -->
-    <div class="group-banner impact group-banner-gap">
-      <span class="group-emoji">🌍</span>
-      <div><div class="group-name">Impact Awards</div><div class="group-desc">Academy-selected — not open for public nomination</div></div>
-    </div>
-
-    <div class="award-block award-block-locked">
-      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
-      <div class="award-name award-name-compact">Ballroom Impact Award</div>
-      <div class="award-tagline">"For the one who shifted the scene — period."</div>
-      <p class="academy-desc">Recognizes long-term impact, influence, and contribution to WNY Ballroom culture. Selected internally by The People's Choice Academy.</p>
-    </div>
-
-    <div class="award-block award-block-locked">
-      <div class="academy-badge"><span>🔒 Academy Selected · Not Open for Public Nomination</span></div>
-      <div class="award-name award-name-compact">Community Impact Award</div>
-      <div class="award-tagline">"For the one doing real work for the people."</div>
-      <p class="academy-desc">Recognizes community care, advocacy, and work both inside and outside the ballroom floor. Selected internally by The People's Choice Academy.</p>
-    </div>
-
-  </div>
-
-  <!-- 03: SUPPORTING STATEMENT -->
-  <div>
     <div class="group-banner impact spaced">
       <span class="group-emoji">🌍</span>
       <div><div class="group-name">Impact Awards</div><div class="group-desc">Honoring long-term contributions and community care — open to all nominations</div></div>
@@ -1071,7 +1048,7 @@ async function submitForm() {
   hideError();
 
   const fd = new FormData();
-  document.querySelectorAll('[name]').forEach(el => {
+  document.querySelectorAll('#nominationForm [name]').forEach(el => {
     if (el.type === 'file') {
       if (el.files[0]) fd.append(el.name, el.files[0]);
       return;
