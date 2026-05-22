@@ -1,0 +1,7 @@
+{
+  "name": "@formspree/cli",
+  "version": "0.9.6",
+  "bin": {
+    "formspree": "./bin.js"
+  }
+}
