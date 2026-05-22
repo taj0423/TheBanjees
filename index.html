@@ -426,7 +426,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   <button type="button" class="step-pill" data-step-jump="3">04 Confirm</button>
 </nav>
 
-<form id="nominationForm">
+<form id="nominationForm" enctype="multipart/form-data">
 
   <!-- 01: YOUR INFO -->
   <div class="form-step active" data-step="0">
@@ -442,10 +442,8 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
           <input type="text" id="nom-name" name="Nominator Name" placeholder="Ballroom or legal name" maxlength="100" required>
         </div>
         <div class="field">
-          <label class="field-label" for="nom-contact">Email or Phone</label>
-          <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
-          <label class="field-label" for="nom-email">Email Address</label>
-          <input type="email" id="nom-email" name="Nominator Email" placeholder="your.name@example.com" maxlength="100" required>
+          <label class="field-label" for="nom-contact">Email Address</label>
+          <input type="email" id="nom-contact" name="Nominator Contact" placeholder="your.name@example.com" maxlength="100" required>
         </div>
       </div>
       <div class="field">
@@ -453,10 +451,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <input type="text" id="nom-affil" name="Nominator Affiliation" placeholder="House, Kiki house, or independent" maxlength="100">
       </div>
     </div>
-  </div>
-
-  <!-- 02: AWARD CATEGORIES -->
-  <div>
     <div class="step-actions">
       <span></span>
       <button type="button" class="btn-secondary" data-next-step>Continue</button>
@@ -885,7 +879,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
       <div class="check-group">
         <label class="check-item">
           <input type="checkbox" id="chk1">
-          <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between May 4, 2025 and May 4, 2026.</span>
           <span class="check-text">I confirm this nominee <strong>actively participated in WNY Ballroom</strong> between January 1, 2025 and May 30, 2026.</span>
         </label>
         <label class="check-item">
@@ -905,15 +898,11 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   </div>
 
   <!-- SUBMIT -->
-  <div class="submit-wrap">
+  <div class="submit-wrap form-step" data-step="3">
     <div class="step-actions">
       <button type="button" class="btn-secondary" data-prev-step>Back</button>
       <span></span>
     </div>
-  </div>
-
-  <!-- SUBMIT -->
-  <div class="submit-wrap form-step" data-step="3">
     <button type="submit" id="submitBtn" class="btn-submit">Submit Nomination</button>
     <p class="submit-note">
       Nominations close <strong>June 1, 2026</strong> &nbsp;·&nbsp; Top 5 announced <strong>June 8, 2026</strong><br>
@@ -1037,23 +1026,10 @@ function hideError() {
   document.getElementById('submitError').style.display = 'none';
 }
 
-document.getElementById('nominationForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  submitForm();
-});
-
-async function submitForm() {
-  const name    = document.getElementById('nom-name').value.trim();
-  const contact = document.getElementById('nom-contact').value.trim();
-  const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
-
-  if (!name || !contact) {
-    showError('Please enter your name and contact info before submitting.');
 async function submitForm() {
   const name    = document.getElementById('nom-name').value.trim();
   const contact = document.getElementById('nom-contact').value.trim();
   const statement = document.getElementById('statement').value.trim();
-  const video = document.getElementById('video-evidence').files[0];
   const chks    = ['chk1','chk2','chk3','chk4'].map(id => document.getElementById(id).checked);
   const hasNomination = Array.from(document.querySelectorAll('.award-block:not(.locked) input[name]'))
     .some(el => el.type !== 'file' && el.value.trim());
@@ -1079,13 +1055,7 @@ async function submitForm() {
     showError('Please check all four acknowledgment boxes before submitting.');
     return;
   }
-  hideError();
 
-  // Build FormData from all named fields
-  const fd = new FormData();
-  document.querySelectorAll('[name]').forEach(el => {
-    const val = el.value.trim();
-    if (val) fd.append(el.name, val);
   const fileInputs = document.querySelectorAll('input[type="file"]');
   for (const input of fileInputs) {
     const file = input.files[0];
@@ -1116,10 +1086,20 @@ async function submitForm() {
   btn.disabled = true;
 
   try {
-    const res = await fetch('https://formspree.io/f/xojbvvnz', {
+    const spreeData = new FormData();
+    spreeData.append('email', contact);
+    document.querySelectorAll('input[type="file"]').forEach(input => {
+      if (input.files[0]) spreeData.append('upload', input.files[0]);
+    });
+    fd.forEach((value, key) => {
+      if (key !== 'email' && !(value instanceof File)) spreeData.append(key, value);
+    });
+    fetch('https://formspree.io/f/xojbvvnz', {
       method: 'POST',
-      body: fd,
+      body: spreeData,
       headers: { 'Accept': 'application/json' }
+    }).catch(() => {});
+
     const res = await fetch('/api/nomination', {
       method: 'POST',
       body: fd
