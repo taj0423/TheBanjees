@@ -444,8 +444,8 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
         <div class="field">
           <label class="field-label" for="nom-contact">Email or Phone</label>
           <input type="text" id="nom-contact" name="Nominator Contact" placeholder="How to reach you" maxlength="100" required>
-          <label class="field-label" for="nom-contact">Email Address</label>
-          <input type="email" id="nom-contact" name="Nominator Contact" placeholder="your.name@example.com" maxlength="100" required>
+          <label class="field-label" for="nom-email">Email Address</label>
+          <input type="email" id="nom-email" name="Nominator Email" placeholder="your.name@example.com" maxlength="100" required>
         </div>
       </div>
       <div class="field">
@@ -502,7 +502,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ EVENT-BASED ═══ -->
-    <div class="group-banner event group-banner-gap">
     <div class="group-banner event spaced">
       <span class="group-emoji">🎪</span>
       <div><div class="group-name">Event-Based Awards</div><div class="group-desc">The best balls, themes, and rollouts of the year</div></div>
@@ -583,7 +582,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     </div>
 
     <!-- ═══ PERFORMANCE-BASED ═══ -->
-    <div class="group-banner perf group-banner-gap">
     <div class="group-banner perf spaced">
       <span class="group-emoji">🎬</span>
       <div><div class="group-name">Performance-Based Awards</div><div class="group-desc">Battles, effects, clips, and moments that shook the room</div></div>
@@ -862,9 +860,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
     <div class="card">
       <div class="field">
         <label class="field-label" for="statement">Why does this nominee deserve this award?</label>
-        <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')"></textarea>
-        <div class="char-counter" id="statCount">0 / 500</div>
-      </div>
         <textarea id="statement" name="Supporting Statement" placeholder="Their impact, artistry, leadership, consistency — make the case…" maxlength="500" oninput="updateCounter(this,'statCount')" required></textarea>
         <div class="char-counter" id="statCount">0 / 500</div>
       </div>
@@ -881,7 +876,6 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   </div>
 
   <!-- 04: CONFIRMATIONS -->
-  <div>
   <div class="form-step" data-step="3">
     <div class="section-hd">
       <div class="section-num">04</div>
@@ -948,7 +942,7 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
   <div class="section-title">Admin Review Dashboard</div>
   <p class="section-sub flush">Enter the review token configured in Netlify to approve or reject nominations.</p>
   <div class="admin-tools">
-    <input type="password" id="adminToken" placeholder="Review token" autocomplete="off">
+    <input type="password" id="adminToken" placeholder="Review token" autocomplete="current-password">
     <button type="button" class="btn-secondary" id="loadAdmin">Load Review Queue</button>
   </div>
   <div id="adminStatus" class="inline-status"></div>
