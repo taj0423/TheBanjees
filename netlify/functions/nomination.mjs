@@ -1,6 +1,7 @@
 import { getStore } from '@netlify/blobs';
 import { getDatabase } from '@netlify/database';
 import { sendToGoogleSheets } from './googleSheets.mjs';
+import { sendSubmissionEmails } from './emailNotifications.mjs';
 
 const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
 const CHECKBOX_FIELD = 'All Acknowledgments Confirmed';
@@ -220,6 +221,18 @@ export default async (request) => {
       await sendToGoogleSheets(saved.id, answers, videoInfo);
     } catch (gErr) {
       console.error('Failed to send data to Google Sheets:', gErr);
+    }
+
+    try {
+      const emailResults = await sendSubmissionEmails({ id: saved.id, answers, summary });
+      const failures = Array.isArray(emailResults)
+        ? emailResults.filter((result) => result.status === 'rejected')
+        : [];
+      if (failures.length) {
+        console.error('One or more submission emails failed to send.');
+      }
+    } catch (emailErr) {
+      console.error('Submission emails could not be sent:', emailErr.message || emailErr);
     }
 
     return json({ ok: true, id: saved.id }, { status: 201 });
