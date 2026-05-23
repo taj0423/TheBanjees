@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Banjees — People's Choice Nomination Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -433,7 +435,15 @@ footer p{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:3px;color:va
 
 <div class="flyer-showcase">
   <div class="flyer-frame">
-    <img src="images/event-flyer.png" alt="The Banjees — 5th Annual Banjee KiKi Ball official event flyer" loading="lazy">
+    <img src="/.netlify/images?url=/images/event-flyer.png&w=420"
+         srcset="/.netlify/images?url=/images/event-flyer.png&w=420 420w,
+                 /.netlify/images?url=/images/event-flyer.png&w=840 840w,
+                 /.netlify/images?url=/images/event-flyer.png&w=1080 1080w"
+         sizes="(max-width: 450px) 100vw, 420px"
+         width="420"
+         height="525"
+         alt="The Banjees — 5th Annual Banjee KiKi Ball official event flyer"
+         fetchpriority="high">
   </div>
   <p class="flyer-caption">Official Event Flyer · July 25, 2026</p>
 </div>
